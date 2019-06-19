@@ -1,0 +1,39 @@
+<title xmlns="http://www.w3.org/1999/html">Aspire | Login</title>
+<div class="row">
+  <div class="middle-box text-center loginscreen animated fadeInDown">
+    <div>
+      <div>
+
+        <h6 class="logo-name">TTN</h6>
+
+      </div>
+
+      <h3>Welcome to Aspire V2.0</h3>
+        <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
+      <div *ngIf="invalidMessage != null" style="color: red">
+        {{invalidMessage}}
+      </div>
+      <p>Login in. To see it in action.</p>
+      <form [formGroup]="loginForm" class="m-t" role="form">
+        <div class="form-group">
+          <input type="email" class="form-control"  formControlName="username" placeholder="Username" required="">
+        </div>
+        <span style="color: red" *ngIf="isLoginSubmit && loginForm.get('username').hasError('required')">
+          Please Enter Your Email
+        </span>
+        <span style="color: red" *ngIf="isLoginSubmit && loginForm.get('username').hasError('email')">
+          Please Enter Correct Email
+        </span>
+        <div class="form-group">
+          <input type="password" class="form-control" formControlName="password" placeholder="Password" required="">
+        </div>
+        <span style="color: red" *ngIf="isLoginSubmit && loginForm.get('password').hasError('required')">
+          Please Enter Your Password
+        </span>
+
+        <button type="submit" (click)="login()" class="btn btn-primary block full-width m-b">Login</button>
+
+      </form>
+    </div>
+  </div>
+</div>
