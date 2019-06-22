@@ -16,7 +16,6 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
 
-    $(document).ready(function () {
       // $('#wizard').steps();
       $('#form').steps({
         bodyTag: 'fieldset',
@@ -85,9 +84,7 @@ export class SignupComponent implements OnInit {
         }
       });
 
-      $('.chosen-select').chosen();
-    });
-
+    $('.chosen-select').chosen({width: "100%"});
   }
 
 }
