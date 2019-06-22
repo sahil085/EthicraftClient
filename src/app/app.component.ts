@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from '@angular/core';
 import {AuthService} from './service/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import {AuthService} from './service/auth.service';
 export class AppComponent {
   title = 'iskconErpClient';
   role: string;
-  constructor(public auth: AuthService, private cd: ChangeDetectorRef) {
+  constructor(public auth: AuthService, private cd: ChangeDetectorRef, private router: Router) {
     this.role = localStorage.getItem('role');
     this.cd.markForCheck();
     setInterval(() => {

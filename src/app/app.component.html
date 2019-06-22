@@ -1,11 +1,14 @@
 
-<div  *ngIf="!this.auth.isLoggednIn()">
+<div  *ngIf="!this.auth.isLoggednIn() && this.router.url !== '/signup'">
   <app-login></app-login>
+</div>
+
+<div  *ngIf="!this.auth.isLoggednIn() && this.router.url === '/signup'">
+  <app-signup></app-signup>
 </div>
 
 <div  *ngIf="this.auth.isLoggednIn()">
   <app-side-nav *ngIf="role === 'ADMIN'"></app-side-nav>
   <app-header></app-header>
+  <router-outlet></router-outlet>
 </div>
-
-

@@ -13,13 +13,13 @@ import {AuthGuard} from './security/auth.guard';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { CreateInstructionSetComponentComponent } from './components/adminComponent/create-instruction-set-component/create-instruction-set-component.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
-
+  {path: 'signup', component: SignupComponent}
 ];
 
 @Injectable()
@@ -54,7 +54,7 @@ export class XhrInterceptor implements HttpInterceptor {
     SideNavComponent,
     HomeComponent,
     LoginComponent,
-    CreateInstructionSetComponentComponent
+    SignupComponent
   ],
   imports: [
     BrowserModule,
