@@ -14,6 +14,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { SignupComponent } from './components/signup/signup.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 
 
 const appRoutes: Routes = [
@@ -63,9 +67,14 @@ export class XhrInterceptor implements HttpInterceptor {
     HttpClientModule,
     HttpModule,
     BrowserAnimationsModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatInputModule,
     RouterModule.forRoot(appRoutes)
   ],
-  exports: [RouterModule],
+  exports: [RouterModule, MatButtonModule, MatCheckboxModule],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: XhrInterceptor,

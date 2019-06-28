@@ -1,182 +1,222 @@
-<div id="wrapper">
-  <div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="ibox">
-          <div class="ibox-content">
-            <h2>
-              Signup Form
-            </h2>
-            <p>
-              This example show how to use Steps with jQuery Validation plugin.
-            </p>
-
-            <form id="form" action="#" class="wizard-big" [formGroup]="signupForm" (ngSubmit)="submitForm()">
-              <h1>Account</h1>
-              <fieldset>
-                <h2>Account Information</h2>
-                <div class="row">
-                  <div class="col-lg-8">
-                    <div class="form-group">
-                      <label>Username *</label>
-                      <input id="userName" name="userName" type="email" class="form-control required"
-                             formControlName="email">
-                    </div>
-                    <div class="form-group">
-                      <label>Password *</label>
-                      <input id="password" name="password" type="password" class="form-control required"
-                             formControlName="password">
-                    </div>
-                    <div class="form-group">
-                      <label>Confirm Password *</label>
-                      <input id="confirm" name="confirm" type="password" class="form-control required"
-                             formControlName="confirm">
-                    </div>
-                  </div>
-                  <div class="col-lg-4">
-                    <div class="text-center">
-                      <div style="margin-top: 20px">
-                        <i class="fa fa-sign-in" style="font-size: 180px;color: #e5e5e5 "></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </fieldset>
-              <h1>Profile</h1>
-              <fieldset>
-                <h2>Profile Information</h2>
-                <div class="row">
-                  <div class="col-lg-4">
-                    <div class="form-group">
-                      <label>First name *</label>
-                      <input id="name" name="name" type="text" class="form-control required"
-                             formControlName="firstName">
-                    </div>
-                    <div class="form-group">
-                      <label>Contact *</label>
-                      <input id="contact" name="contact" type="text" class="form-control required"
-                             formControlName="contact">
-                    </div>
-                    <div class="form-group">
-                      <label>City *</label>
-                      <select data-placeholder="City" class="chosen-select required" tabindex="2"
-                              formControlName="city">
-                        <option value="delhi">Delhi</option>
-                        <option value="ghaziabad">Ghaziabad</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-lg-4">
-                    <div class="form-group">
-                      <label>Last name *</label>
-                      <input id="surname" name="surname" type="text" class="form-control required"
-                             formControlName="surname">
-                    </div>
-                    <div class="form-group">
-                      <label>Whatsapp</label>
-                      <input id="whatsapp" name="whatsapp" type="text" class="form-control" formControlName="whatsapp">
-                    </div>
-                    <div class="form-group">
-                      <label>State *</label>
-                      <select data-placeholder="State" class="chosen-select required" tabindex="2"
-                              formControlName="state">
-                        <option value="delhi">Delhi</option>
-                        <option value="up">Uttar Pradesh</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-lg-4">
-                    <div class="form-group">
-                      <label>Gender</label>
-                      <select data-placeholder="Gender" class="chosen-select required" tabindex="2"
-                              formControlName="gender">
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label>Address *</label>
-                      <input id="address" name="address" type="text" class="form-control required"
-                             formControlName="address">
-                    </div>
-                    <div class="form-group">
-                      <label>Country *</label>
-                      <select data-placeholder="Country" class="chosen-select required" tabindex="2"
-                              formControlName="country">
-                        <option value="india">India</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </fieldset>
-
-              <h1>Warning</h1>
-              <fieldset>
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label>College Name *</label>
-                      <select data-placeholder="College Name" class="chosen-select required" tabindex="2"
-                              formControlName="college">
-                        <option value="IIT Delhi">IIT Delhi</option>
-                        <option value="DU">Delhi University</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-lg-4">
-                    <div class="form-group">
-                      <label>Course</label>
-                      <input id="course" name="course" type="text" class="form-control required" formControlName="course">
-                    </div>
-                  </div>
-                  <div class="col-lg-2">
-                    <div class="form-group">
-                      <label>Year</label>
-                      <select data-placeholder="Year" class="chosen-select required" tabindex="2"
-                              formControlName="year">
-                        <option value="one">1st year</option>
-                        <option value="two">2nd year</option>
-                        <option value="three">3rd year</option>
-                        <option value="four">4th year</option>
-                        <option value="five">5th year</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </fieldset>
-
-              <h1>Finish</h1>
-              <fieldset>
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    <label>Achievments</label>
-                    <input id="achievements" name="achievements" type="text" class="form-control" formControlName="achievements">
-                  </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    <label>Hobbies *</label>
-                    <input id="hobbies" name="hobbies" type="text" class="form-control required" formControlName="hobbies">
-                  </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    <label>Skills *</label>
-                    <input id="skills" name="skills" type="text" class="form-control required" formControlName="skills">
-                  </div>
-                </div>
-                <h2>Terms and Conditions</h2>
-                <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
-                <label for="acceptTerms">
-                  I agree with the Terms and Conditions.
-                </label>
-              </fieldset>
-
-            </form>
-          </div>
-        </div>
+<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+</button>
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Fill out your name</ng-template>
+      <mat-form-field >
+        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
       </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Fill out your address</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Address" formControlName="secondCtrl" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
     </div>
-  </div>
-</div>
+  </mat-step>
+</mat-horizontal-stepper>
+
+
+
+
+<!--<div id="wrapper">-->
+  <!--<div class="wrapper wrapper-content animated fadeInRight">-->
+    <!--<div class="row">-->
+      <!--<div class="col-lg-12">-->
+        <!--<div class="ibox">-->
+          <!--<div class="ibox-content">-->
+            <!--<h2>-->
+              <!--Signup Form-->
+            <!--</h2>-->
+            <!--<p>-->
+              <!--This example show how to use Steps with jQuery Validation plugin.-->
+            <!--</p>-->
+
+            <!--<form id="form" action="#" class="wizard-big" [formGroup]="signupForm" (ngSubmit)="submitForm()">-->
+              <!--<h1>Account</h1>-->
+              <!--<fieldset>-->
+                <!--<h2>Account Information</h2>-->
+                <!--<div class="row">-->
+                  <!--<div class="col-lg-8">-->
+                    <!--<div class="form-group">-->
+                      <!--<label>Username *</label>-->
+                      <!--<input id="userName" name="userName" type="email" class="form-control required"-->
+                             <!--formControlName="email">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                      <!--<label>Password *</label>-->
+                      <!--<input id="password" name="password" type="password" class="form-control required"-->
+                             <!--formControlName="password">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                      <!--<label>Confirm Password *</label>-->
+                      <!--<input id="confirm" name="confirm" type="password" class="form-control required"-->
+                             <!--formControlName="confirm">-->
+                    <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="col-lg-4">-->
+                    <!--<div class="text-center">-->
+                      <!--<div style="margin-top: 20px">-->
+                        <!--<i class="fa fa-sign-in" style="font-size: 180px;color: #e5e5e5 "></i>-->
+                      <!--</div>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+
+              <!--</fieldset>-->
+              <!--<h1>Profile</h1>-->
+              <!--<fieldset>-->
+                <!--<h2>Profile Information</h2>-->
+                <!--<div class="row">-->
+                  <!--<div class="col-lg-4">-->
+                    <!--<div class="form-group">-->
+                      <!--<label>First name *</label>-->
+                      <!--<input id="name" name="name" type="text" class="form-control required"-->
+                             <!--formControlName="firstName">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                      <!--<label>Contact *</label>-->
+                      <!--<input id="contact" name="contact" type="text" class="form-control required"-->
+                             <!--formControlName="contact">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                      <!--<label>City *</label>-->
+                      <!--<select data-placeholder="City" class="chosen-select required" tabindex="2"-->
+                              <!--formControlName="city">-->
+                        <!--<option value="delhi">Delhi</option>-->
+                        <!--<option value="ghaziabad">Ghaziabad</option>-->
+                      <!--</select>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="col-lg-4">-->
+                    <!--<div class="form-group">-->
+                      <!--<label>Last name *</label>-->
+                      <!--<input id="surname" name="surname" type="text" class="form-control required"-->
+                             <!--formControlName="surname">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                      <!--<label>Whatsapp</label>-->
+                      <!--<input id="whatsapp" name="whatsapp" type="text" class="form-control" formControlName="whatsapp">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                      <!--<label>State *</label>-->
+                      <!--<select data-placeholder="State" class="chosen-select required" tabindex="2"-->
+                              <!--formControlName="state">-->
+                        <!--<option value="delhi">Delhi</option>-->
+                        <!--<option value="up">Uttar Pradesh</option>-->
+                      <!--</select>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="col-lg-4">-->
+                    <!--<div class="form-group">-->
+                      <!--<label>Gender</label>-->
+                      <!--<select data-placeholder="Gender" class="chosen-select required" tabindex="2"-->
+                              <!--formControlName="gender">-->
+                        <!--<option value="Male">Male</option>-->
+                        <!--<option value="Female">Female</option>-->
+                      <!--</select>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                      <!--<label>Address *</label>-->
+                      <!--<input id="address" name="address" type="text" class="form-control required"-->
+                             <!--formControlName="address">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                      <!--<label>Country *</label>-->
+                      <!--<select data-placeholder="Country" class="chosen-select required" tabindex="2"-->
+                              <!--formControlName="country">-->
+                        <!--<option value="india">India</option>-->
+                      <!--</select>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</fieldset>-->
+
+              <!--<h1>Warning</h1>-->
+              <!--<fieldset>-->
+                <!--<div class="row">-->
+                  <!--<div class="col-lg-6">-->
+                    <!--<div class="form-group">-->
+                      <!--<label>College Name *</label>-->
+                      <!--<select data-placeholder="College Name" class="chosen-select required" tabindex="2"-->
+                              <!--formControlName="college">-->
+                        <!--<option value="IIT Delhi">IIT Delhi</option>-->
+                        <!--<option value="DU">Delhi University</option>-->
+                      <!--</select>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="col-lg-4">-->
+                    <!--<div class="form-group">-->
+                      <!--<label>Course</label>-->
+                      <!--<input id="course" name="course" type="text" class="form-control required" formControlName="course">-->
+                    <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="col-lg-2">-->
+                    <!--<div class="form-group">-->
+                      <!--<label>Year</label>-->
+                      <!--<select data-placeholder="Year" class="chosen-select required" tabindex="2"-->
+                              <!--formControlName="year">-->
+                        <!--<option value="one">1st year</option>-->
+                        <!--<option value="two">2nd year</option>-->
+                        <!--<option value="three">3rd year</option>-->
+                        <!--<option value="four">4th year</option>-->
+                        <!--<option value="five">5th year</option>-->
+                      <!--</select>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</fieldset>-->
+
+              <!--<h1>Finish</h1>-->
+              <!--<fieldset>-->
+                <!--<div class="col-lg-12">-->
+                  <!--<div class="form-group">-->
+                    <!--<label>Achievments</label>-->
+                    <!--<input id="achievements" name="achievements" type="text" class="form-control" formControlName="achievements">-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-lg-12">-->
+                  <!--<div class="form-group">-->
+                    <!--<label>Hobbies *</label>-->
+                    <!--<input id="hobbies" name="hobbies" type="text" class="form-control required" formControlName="hobbies">-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-lg-12">-->
+                  <!--<div class="form-group">-->
+                    <!--<label>Skills *</label>-->
+                    <!--<input id="skills" name="skills" type="text" class="form-control required" formControlName="skills">-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<h2>Terms and Conditions</h2>-->
+                <!--<input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">-->
+                <!--<label for="acceptTerms">-->
+                  <!--I agree with the Terms and Conditions.-->
+                <!--</label>-->
+              <!--</fieldset>-->
+
+            <!--</form>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
