@@ -18,6 +18,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import {CollegeRegistrationFormComponent} from './components/adminComponent/college-registration-form/college-registration-form.component';
 
 
 const appRoutes: Routes = [
@@ -58,7 +59,8 @@ export class XhrInterceptor implements HttpInterceptor {
     SideNavComponent,
     HomeComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    CollegeRegistrationFormComponent
   ],
   imports: [
     BrowserModule,

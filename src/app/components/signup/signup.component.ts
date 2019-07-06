@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-
-declare var $: any;
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AddressModel} from '../../models/address.model';
 
 @Component({
   selector: 'app-signup',
@@ -11,12 +10,31 @@ declare var $: any;
 })
 export class SignupComponent implements OnInit {
 
-  signupForm: FormGroup;
-  isLinear = false;
+  formData: any = [];
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  firstCtrl: any = '';
-  secondCtrl: any = '';
+  thirdFormGroup: FormGroup;
+  fourthFormGroup: FormGroup;
+  email: any = '';
+  password: any = '';
+  confirm: any = '';
+  firstName: any = '';
+  middleName: any = '';
+  lastName: any = '';
+  mobileNumber: any = '';
+  whatsappNumber: any = '';
+  permanentAddress: any = new AddressModel();
+  presentAddress: any = new AddressModel();
+  country: any = '';
+  gender: any = '';
+  college: any = '';
+  courseName: any = '';
+  batch: any = '';
+  achievements: any = '';
+  hobbies: any = '';
+  skills: any = '';
+  inspirationSource: any = '';
+  profilePic: any = '';
 
   constructor(private router: Router, private route: ActivatedRoute, private _formBuilder: FormBuilder) {
 
@@ -25,44 +43,57 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     const that = this;
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: [this.firstCtrl, Validators.required]
+      email: [this.email, Validators.required],
+      password: [this.password, Validators.required],
+      confirm: [this.confirm, Validators.required],
+      firstName: [this.firstName, Validators.required],
+      middleName: [this.middleName],
+      lastName: [this.lastName, Validators.required],
+      gender: [this.gender, Validators.required],
     });
     this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: [this.secondCtrl, Validators.required]
+      mobileNumber: [this.mobileNumber, Validators.required],
+      whatsappNumber: [this.whatsappNumber],
+      permanentAddress: this._formBuilder.group({
+        address: ['', Validators.required],
+        city: ['', Validators.required],
+        state: ['', Validators.required]
+      }),
+      presentAddress: this._formBuilder.group({
+        address: ['', Validators.required],
+        city: ['', Validators.required],
+        state: ['', Validators.required]
+      }),
+      country: [this.country, Validators.required],
     });
-
-    // this.signupForm = new FormGroup({
-    //   email: new FormControl(),
-    //   password: new FormControl(),
-    //   confirm: new FormControl(),
-    //   firstName: new FormControl(),
-    //   surname: new FormControl(),
-    //   contact: new FormControl(),
-    //   whatsapp: new FormControl(),
-    //   address: new FormControl(),
-    //   city: new FormControl(),
-    //   state: new FormControl(),
-    //   country: new FormControl(),
-    //   gender: new FormControl(),
-    //   college: new FormControl(),
-    //   course: new FormControl(),
-    //   year: new FormControl(),
-    //   achievements: new FormControl(),
-    //   hobbies: new FormControl(),
-    //   skills: new FormControl()
-    // });
+    this.thirdFormGroup = this._formBuilder.group({
+      courseName: [this.courseName, Validators.required],
+      college: [this.college, Validators.required],
+      batch: [this.batch, Validators.required]
+    });
+    this.fourthFormGroup = this._formBuilder.group({
+      achievements: [this.achievements],
+      hobbies: [this.hobbies],
+      skills: [this.skills],
+      inspirationSource: [this.inspirationSource],
+      profilePic: [this.profilePic]
+    });
 
 
   }
 
   submitForm = () => {
-    if (this.signupForm.invalid) {
-      console.log('hello', this.signupForm.value);
-      this.signupForm.get('email').markAsTouched();
-      this.signupForm.get('password').markAsTouched();
+    this.formData = {
+      ...this.firstFormGroup.value,
+      ...this.secondFormGroup.value,
+      ...this.thirdFormGroup.value,
+      ...this.fourthFormGroup.value
+    };
+    console.log(this.formData);
+    if (this.firstFormGroup.invalid) {
+      this.firstFormGroup.get('email').markAsTouched();
+      this.firstFormGroup.get('password').markAsTouched();
       return;
-    } else {
-      console.log(this.signupForm.value);
     }
   }
 }
