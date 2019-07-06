@@ -1,4 +1,4 @@
-<mat-horizontal-stepper [linear]="false" #stepper>
+<mat-horizontal-stepper [linear]="true" #stepper>
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Account Information</ng-template>
@@ -8,6 +8,9 @@
           placeholder="First Name"
           formControlName="firstName"
           required>
+        <mat-error *ngIf="firstFormGroup.get('firstName').hasError('required')">
+          Please enter your first name
+        </mat-error>
       </mat-form-field>
       <br/>
       <mat-form-field>
@@ -24,6 +27,9 @@
           placeholder="Last Name"
           formControlName="lastName"
           required>
+        <mat-error *ngIf="firstFormGroup.get('lastName').hasError('required')">
+          Please enter your last name
+        </mat-error>
       </mat-form-field>
       <br/>
       <mat-form-field>
@@ -32,6 +38,9 @@
           placeholder="Gender"
           formControlName="gender"
           required>
+        <mat-error *ngIf="firstFormGroup.get('gender').hasError('required')">
+          Please enter your gender
+        </mat-error>
       </mat-form-field>
       <br/>
       <mat-form-field>
@@ -40,6 +49,9 @@
           placeholder="Email"
           formControlName="email"
           required>
+        <mat-error *ngIf="firstFormGroup.get('email').hasError('required')">
+          Please enter your email
+        </mat-error>
       </mat-form-field>
       <br/>
       <mat-form-field>
@@ -49,6 +61,9 @@
           formControlName="password"
           type="password"
           required>
+        <mat-error *ngIf="firstFormGroup.get('password').hasError('required')">
+          Please enter your password
+        </mat-error>
       </mat-form-field>
       <br/>
       <mat-form-field>
@@ -58,6 +73,9 @@
           formControlName="confirm"
           type="password"
           required>
+        <mat-error *ngIf="firstFormGroup.get('confirm').hasError('required')">
+          Please confirm your password
+        </mat-error>
       </mat-form-field>
       <div>
         <button mat-button matStepperNext>Next</button>
@@ -73,6 +91,9 @@
           placeholder="Contact"
           formControlName="mobileNumber"
           required>
+        <mat-error *ngIf="secondFormGroup.get('mobileNumber').hasError('required')">
+          Please enter your mobile number
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <input
@@ -88,6 +109,9 @@
             placeholder="Address"
             formControlName="address"
             required>
+          <mat-error *ngIf="secondFormGroup.get('presentAddress').get('address').hasError('required')">
+            Please enter your Address
+          </mat-error>
         </mat-form-field>
         <mat-form-field>
           <input
@@ -95,6 +119,9 @@
             placeholder="City"
             formControlName="city"
             required>
+          <mat-error *ngIf="secondFormGroup.get('presentAddress').get('city').hasError('required')">
+            Please enter your city
+          </mat-error>
         </mat-form-field>
         <mat-form-field>
           <input
@@ -102,6 +129,9 @@
             placeholder="State"
             formControlName="state"
             required>
+          <mat-error *ngIf="secondFormGroup.get('presentAddress').get('state').hasError('required')">
+            Please enter your present state
+          </mat-error>
         </mat-form-field>
       </div>
       <div formGroupName="permanentAddress">
@@ -111,6 +141,9 @@
             placeholder="Address"
             formControlName="address"
             required>
+          <mat-error *ngIf="secondFormGroup.get('permanentAddress').get('address').hasError('required')">
+            Please enter your address
+          </mat-error>
         </mat-form-field>
         <mat-form-field>
           <input
@@ -118,6 +151,9 @@
             placeholder="City"
             formControlName="city"
             required>
+          <mat-error *ngIf="secondFormGroup.get('permanentAddress').get('city').hasError('required')">
+            Please enter your city
+          </mat-error>
         </mat-form-field>
         <mat-form-field>
           <input
@@ -125,6 +161,9 @@
             placeholder="State"
             formControlName="state"
             required>
+          <mat-error *ngIf="secondFormGroup.get('permanentAddress').get('state').hasError('required')">
+            Please enter your state
+          </mat-error>
         </mat-form-field>
       </div>
       <mat-form-field>
@@ -133,6 +172,9 @@
           placeholder="Country"
           formControlName="country"
           required>
+        <mat-error *ngIf="secondFormGroup.get('country').hasError('required')">
+          Please enter your country
+        </mat-error>
       </mat-form-field>
       <div>
         <button mat-button matStepperPrevious>Back</button>
@@ -146,16 +188,22 @@
       <mat-form-field>
         <input
           matInput
-          placeholder="Course Name"
-          formControlName="courseName"
+          placeholder="College"
+          formControlName="college"
           required>
+        <mat-error *ngIf="thirdFormGroup.get('college').hasError('required')">
+          Please enter your College Name
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <input
           matInput
-          placeholder="College"
-          formControlName="college"
+          placeholder="Course Name"
+          formControlName="courseName"
           required>
+        <mat-error *ngIf="thirdFormGroup.get('courseName').hasError('required')">
+          Please enter your Course Name
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <input
@@ -163,6 +211,9 @@
           placeholder="Batch"
           formControlName="batch"
           required>
+        <mat-error *ngIf="thirdFormGroup.get('batch').hasError('required')">
+          Please enter your batch
+        </mat-error>
       </mat-form-field>
       <div>
         <button mat-button matStepperPrevious>Back</button>
