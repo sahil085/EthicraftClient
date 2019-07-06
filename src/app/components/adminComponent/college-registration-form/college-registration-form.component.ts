@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-college-registration-form',
@@ -7,9 +9,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CollegeRegistrationFormComponent implements OnInit {
 
-  constructor() { }
+  collegeFormGroup: FormGroup;
+  collegeName: string;
+  collegeAbbreviation: string;
+  universityName: string;
+  address: string;
+  city: string;
+  state: string;
+  comments: string;
+  faculty: string;
+  referencePersonName: string;
+  referencePersonContact: string;
 
-  ngOnInit() {
+  constructor(private router: Router, private route: ActivatedRoute, private _formBuilder: FormBuilder) {
   }
 
+  ngOnInit() {
+    this.collegeFormGroup = this._formBuilder.group({
+      collegeName: [this.collegeName, Validators.required],
+      collegeAbbreviation: [this.collegeAbbreviation, Validators.required],
+      universityName: [this.universityName, Validators.required],
+      address: [this.address, Validators.required],
+      city: [this.city, Validators.required],
+      state: [this.state, Validators.required],
+      comments: [this.comments, Validators.required],
+      faculty: [this.faculty, Validators.required],
+      referencePersonName: [this.referencePersonName, Validators.required],
+      referencePersonContact: [this.referencePersonContact, Validators.required]
+    });
+  }
+
+  submitForm = () => {
+    console.log(this.collegeFormGroup.value);
+  }
 }

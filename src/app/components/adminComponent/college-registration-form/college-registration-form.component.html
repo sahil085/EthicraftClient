@@ -1,3 +1,85 @@
-<p>
-  college-registration-form works!
-</p>
+<form [formGroup]="collegeFormGroup">
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="College Name"
+      formControlName="collegeName"
+      required>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="College Abbreviation"
+      formControlName="collegeAbbreviation"
+      required
+    >
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="University Name"
+      formControlName="universityName"
+      required>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Address"
+      formControlName="address"
+      required>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="City"
+      formControlName="city"
+      required>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="State"
+      formControlName="state"
+      required>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Comments"
+      formControlName="comments"
+      required>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Faculty"
+      formControlName="faculty"
+      required>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Referrer Name"
+      formControlName="referencePersonName"
+      required>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Referrer Contact"
+      formControlName="referencePersonContact"
+      required>
+  </mat-form-field>
+  <div>
+    <button mat-button (click)="submitForm()">Add College</button>
+  </div>
+</form>
