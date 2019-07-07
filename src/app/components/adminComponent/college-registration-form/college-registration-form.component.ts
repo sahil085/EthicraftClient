@@ -55,7 +55,7 @@ export class CollegeRegistrationFormComponent implements OnInit {
         }
         ,
         err => {
-          if (err.status) {
+          if (err.status === 400) {
             this.showToaster('Validation failed', 'error');
 
           } else {

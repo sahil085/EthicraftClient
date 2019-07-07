@@ -1,4 +1,4 @@
-<mat-horizontal-stepper [linear]="true" #stepper>
+<mat-horizontal-stepper [linear]="false" #stepper>
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Account Information</ng-template>
@@ -86,7 +86,7 @@
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Contact Details</ng-template>
       <mat-form-field>
-        <input
+        <input type="number"
           matInput
           placeholder="Contact"
           formControlName="mobileNumber"
@@ -96,7 +96,7 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input
+        <input type="number"
           matInput
           placeholder="Whatsapp"
           formControlName="whatsappNumber"
@@ -186,12 +186,11 @@
     <form [formGroup]="thirdFormGroup">
       <ng-template matStepLabel>College Details</ng-template>
       <mat-form-field>
-        <input
-          matInput
-          placeholder="College"
-          formControlName="college"
-          required>
-        <mat-error *ngIf="thirdFormGroup.get('college').hasError('required')">
+        <mat-select required formControlName="collegeId">
+          <mat-option *ngFor="let college of collegeList | keyvalue:keyComparator" [value]="college.key">{{college.value}}</mat-option>
+        </mat-select>
+
+        <mat-error *ngIf="thirdFormGroup.get('collegeId').hasError('required')">
           Please enter your College Name
         </mat-error>
       </mat-form-field>

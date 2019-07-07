@@ -1,7 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AddressModel} from '../../models/address.model';
+import {SignupService} from '../../service/signup.service';
+import Swal from 'sweetalert2';
+import {CollegeService} from '../../service/college.service';
+import {KeyValue} from '@angular/common';
+import {AddressModel} from '../../models/Address.model';
 
 @Component({
   selector: 'app-signup',
@@ -21,13 +25,13 @@ export class SignupComponent implements OnInit {
   firstName: any = '';
   middleName: any = '';
   lastName: any = '';
-  mobileNumber: any = '';
-  whatsappNumber: any = '';
+  mobileNumber: number ;
+  whatsappNumber: number ;
   permanentAddress: any = new AddressModel();
   presentAddress: any = new AddressModel();
   country: any = '';
   gender: any = '';
-  college: any = '';
+  collegeId: any = '';
   courseName: any = '';
   batch: any = '';
   achievements: any = '';
@@ -35,8 +39,10 @@ export class SignupComponent implements OnInit {
   skills: any = '';
   inspirationSource: any = '';
   profilePic: any = '';
+  collegeList: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private _formBuilder: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private collegeService: CollegeService,
+              private _formBuilder: FormBuilder, private signUpService: SignupService) {
 
   }
 
@@ -67,7 +73,7 @@ export class SignupComponent implements OnInit {
     });
     this.thirdFormGroup = this._formBuilder.group({
       courseName: [this.courseName, Validators.required],
-      college: [this.college, Validators.required],
+      collegeId: [this.collegeId, Validators.required],
       batch: [this.batch, Validators.required]
     });
     this.fourthFormGroup = this._formBuilder.group({
@@ -78,7 +84,21 @@ export class SignupComponent implements OnInit {
       profilePic: [this.profilePic]
     });
 
+  this.fetchActiveCollege();
+  }
 
+  fetchActiveCollege() {
+  this.collegeList = this.collegeService.findCollegeDropDown().subscribe(
+    data => {
+      this.collegeList = data;
+      console.log(this.collegeList);
+
+    }
+  );
+  }
+
+  keyComparator(a: KeyValue<number, String>, b: KeyValue<number, String>) {
+    return 0;
   }
 
   submitForm = () => {
@@ -92,6 +112,24 @@ export class SignupComponent implements OnInit {
         ...this.fourthFormGroup.value
       };
       console.log(this.formData);
+      this.signUpService.signUp(this.formData).subscribe(
+        (data) => {
+          if (data['errorMessage'] !== null) {
+            this.showToaster(data['errorMessage'], 'error');
+          } else {
+            this.showToaster(data['successMessage'], 'success');
+          }
+        },
+        err => {
+          if (err.status) {
+            this.showToaster('Validation failed', 'error');
+
+          } else {
+            this.showToaster(err['error'].message ? err['error'].message : err['error'].text, 'error');
+
+          }
+        }
+      );
     }
 
 
@@ -100,4 +138,14 @@ export class SignupComponent implements OnInit {
       this.firstFormGroup.get('password').markAsTouched();
       return;
     }
+
+  }
+
+  showToaster(message, type) {
+    Swal({
+      title: message,
+      type: type,
+      timer: 1500
+    });
+  }
 }

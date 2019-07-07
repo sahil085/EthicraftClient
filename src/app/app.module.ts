@@ -16,9 +16,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { SignupComponent } from './components/signup/signup.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material';
+import {MatInputModule, MatOptionModule, MatSelect, MatSelectModule} from '@angular/material';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import {CollegeRegistrationFormComponent} from './components/adminComponent/college-registration-form/college-registration-form.component';
+import {KeysPipe} from './pipe/keys-pipe';
 
 
 const appRoutes: Routes = [
@@ -61,6 +62,7 @@ export class XhrInterceptor implements HttpInterceptor {
     HomeComponent,
     LoginComponent,
     SignupComponent,
+    KeysPipe,
     CollegeRegistrationFormComponent
   ],
   imports: [
@@ -75,6 +77,8 @@ export class XhrInterceptor implements HttpInterceptor {
     MatButtonModule,
     MatCheckboxModule,
     MatInputModule,
+    MatSelectModule,
+    MatOptionModule,
     RouterModule.forRoot(appRoutes)
   ],
   exports: [RouterModule, MatButtonModule, MatCheckboxModule],
