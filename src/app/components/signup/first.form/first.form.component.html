@@ -1,0 +1,81 @@
+<form [style.fontSize.px]="16" [formGroup]="firstFormGroup">
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="First Name"
+      formControlName="firstName"
+      required>
+    <mat-error *ngIf="firstFormGroup.get('firstName').hasError('required')">
+      Please enter your first name
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Middle Name"
+      formControlName="middleName"
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Last Name"
+      formControlName="lastName"
+      required>
+    <mat-error *ngIf="firstFormGroup.get('lastName').hasError('required')">
+      Please enter your last name
+    </mat-error>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Gender"
+      formControlName="gender"
+      required>
+    <mat-error *ngIf="firstFormGroup.get('gender').hasError('required')">
+      Please enter your gender
+    </mat-error>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Email"
+      formControlName="email"
+      required>
+    <mat-error *ngIf="firstFormGroup.get('email').hasError('required')">
+      Please enter your email
+    </mat-error>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Password"
+      formControlName="password"
+      type="password"
+      required>
+    <mat-error *ngIf="firstFormGroup.get('password').hasError('required')">
+      Please enter your password
+    </mat-error>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Confirm Password"
+      formControlName="confirm"
+      type="password"
+      required>
+    <mat-error *ngIf="firstFormGroup.get('confirm').hasError('required')">
+      Please confirm your password
+    </mat-error>
+    <mat-error *ngIf="firstFormGroup.hasError('notSame')">
+      Passwords do not match
+    </mat-error>
+  </mat-form-field>
+  <div>
+    <button mat-button matStepperNext>Next</button>
+  </div>
+</form>

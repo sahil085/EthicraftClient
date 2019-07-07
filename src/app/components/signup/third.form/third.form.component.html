@@ -1,0 +1,36 @@
+<form [style.fontSize.px]="16" [formGroup]="thirdFormGroup">
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="College"
+      formControlName="college"
+      required>
+    <mat-error *ngIf="thirdFormGroup.get('college').hasError('required')">
+      Please enter your College Name
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Course Name"
+      formControlName="courseName"
+      required>
+    <mat-error *ngIf="thirdFormGroup.get('courseName').hasError('required')">
+      Please enter your Course Name
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Batch"
+      formControlName="batch"
+      required>
+    <mat-error *ngIf="thirdFormGroup.get('batch').hasError('required')">
+      Please enter your batch
+    </mat-error>
+  </mat-form-field>
+  <div>
+    <button mat-button matStepperPrevious>Back</button>
+    <button mat-button matStepperNext>Next</button>
+  </div>
+</form>

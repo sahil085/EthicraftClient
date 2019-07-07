@@ -19,6 +19,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import {CollegeRegistrationFormComponent} from './components/adminComponent/college-registration-form/college-registration-form.component';
+import {FirstFormComponent} from './components/signup/first.form/first.form.component';
+import { SecondFormComponent } from './components/signup/second.form/second.form.component';
+import { ThirdFormComponent } from './components/signup/third.form/third.form.component';
+import { FourthFormComponent } from './components/signup/fourth.form/fourth.form.component';
 
 
 const appRoutes: Routes = [
@@ -61,7 +65,12 @@ export class XhrInterceptor implements HttpInterceptor {
     HomeComponent,
     LoginComponent,
     SignupComponent,
-    CollegeRegistrationFormComponent
+    CollegeRegistrationFormComponent,
+    FirstFormComponent,
+    SecondFormComponent,
+    ThirdFormComponent,
+    FourthFormComponent,
+    FirstFormComponent
   ],
   imports: [
     BrowserModule,

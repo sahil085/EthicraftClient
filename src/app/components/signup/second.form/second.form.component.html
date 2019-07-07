@@ -1,0 +1,101 @@
+<form [style.fontSize.px]="16" [formGroup]="secondFormGroup">
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Contact"
+      formControlName="mobileNumber"
+      required>
+    <mat-error *ngIf="secondFormGroup.get('mobileNumber').hasError('required')">
+      Please enter your mobile number
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Whatsapp"
+      formControlName="whatsappNumber"
+    >
+  </mat-form-field>
+  <div formGroupName="presentAddress">
+    <h5>Present Address</h5>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Address"
+        formControlName="address"
+        required>
+      <mat-error *ngIf="secondFormGroup.get('presentAddress').get('address').hasError('required')">
+        Please enter your Address
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="City"
+        formControlName="city"
+        required>
+      <mat-error *ngIf="secondFormGroup.get('presentAddress').get('city').hasError('required')">
+        Please enter your city
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="State"
+        formControlName="state"
+        required>
+      <mat-error *ngIf="secondFormGroup.get('presentAddress').get('state').hasError('required')">
+        Please enter your present state
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div formGroupName="permanentAddress">
+    <h5>Permanent Address</h5>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Address"
+        formControlName="address"
+        required>
+      <mat-error *ngIf="secondFormGroup.get('permanentAddress').get('address').hasError('required')">
+        Please enter your address
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="City"
+        formControlName="city"
+        required>
+      <mat-error *ngIf="secondFormGroup.get('permanentAddress').get('city').hasError('required')">
+        Please enter your city
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="State"
+        formControlName="state"
+        required>
+      <mat-error *ngIf="secondFormGroup.get('permanentAddress').get('state').hasError('required')">
+        Please enter your state
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Country"
+        formControlName="country"
+        required>
+      <mat-error *ngIf="secondFormGroup.get('country').hasError('required')">
+        Please enter your country
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <button mat-button matStepperPrevious>Back</button>
+    <button mat-button matStepperNext>Next</button>
+  </div>
+</form>

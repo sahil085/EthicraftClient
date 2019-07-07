@@ -23,8 +23,6 @@ export class SignupComponent implements OnInit {
   lastName: any = '';
   mobileNumber: any = '';
   whatsappNumber: any = '';
-  permanentAddress: any = new AddressModel();
-  presentAddress: any = new AddressModel();
   country: any = '';
   gender: any = '';
   college: any = '';
@@ -35,6 +33,7 @@ export class SignupComponent implements OnInit {
   skills: any = '';
   inspirationSource: any = '';
   profilePic: any = '';
+
 
   constructor(private router: Router, private route: ActivatedRoute, private _formBuilder: FormBuilder) {
 
@@ -49,7 +48,7 @@ export class SignupComponent implements OnInit {
       middleName: [this.middleName],
       lastName: [this.lastName, Validators.required],
       gender: [this.gender, Validators.required],
-    });
+    }, {validator: this.checkPasswords});
     this.secondFormGroup = this._formBuilder.group({
       mobileNumber: [this.mobileNumber, Validators.required],
       whatsappNumber: [this.whatsappNumber],
@@ -94,5 +93,12 @@ export class SignupComponent implements OnInit {
       this.firstFormGroup.get('password').markAsTouched();
       return;
     }
+  }
+
+  checkPasswords(group: FormGroup) { // here we have the 'passwords' group
+    const pass = group.controls.password.value;
+    const confirmPass = group.controls.confirm.value;
+
+    return pass === confirmPass ? null : { notSame: true }
   }
 }
