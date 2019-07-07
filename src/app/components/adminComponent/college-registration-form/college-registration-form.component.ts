@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {CollegeService} from '../../../service/college.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-college-registration-form',
@@ -19,9 +22,9 @@ export class CollegeRegistrationFormComponent implements OnInit {
   comments: string;
   faculty: string;
   referencePersonName: string;
-  referencePersonContact: string;
+  referencePersonContact: number;
 
-  constructor(private router: Router, private route: ActivatedRoute, private _formBuilder: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private _formBuilder: FormBuilder, private collegeService: CollegeService) {
   }
 
   ngOnInit() {
@@ -41,5 +44,36 @@ export class CollegeRegistrationFormComponent implements OnInit {
 
   submitForm = () => {
     console.log(this.collegeFormGroup.value);
+    if (this.collegeFormGroup.valid) {
+      this.collegeService.registerCollege(this.collegeFormGroup.value).subscribe(
+        (data) => {
+          if (data['errorMessage'] !== null) {
+            this.showToaster(data['errorMessage'], 'error');
+          } else {
+            this.showToaster(data['successMessage'], 'success');
+          }
+        }
+        ,
+        err => {
+          if (err.status) {
+            this.showToaster('Validation failed', 'error');
+
+          } else {
+            this.showToaster(err['error'].message ? err['error'].message : err['error'].text, 'error');
+
+          }
+        }
+      );
+
+    }
+  }
+
+
+  showToaster(message, type) {
+    Swal({
+      title: message,
+      type: type,
+      timer: 1500
+    });
   }
 }

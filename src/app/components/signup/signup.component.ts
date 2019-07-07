@@ -82,17 +82,22 @@ export class SignupComponent implements OnInit {
   }
 
   submitForm = () => {
-    this.formData = {
-      ...this.firstFormGroup.value,
-      ...this.secondFormGroup.value,
-      ...this.thirdFormGroup.value,
-      ...this.fourthFormGroup.value
-    };
-    console.log(this.formData);
+    if (this.firstFormGroup.invalid || this.secondFormGroup.invalid || this.thirdFormGroup.invalid || this.fourthFormGroup.invalid) {
+
+    } else {
+      this.formData = {
+        ...this.firstFormGroup.value,
+        ...this.secondFormGroup.value,
+        ...this.thirdFormGroup.value,
+        ...this.fourthFormGroup.value
+      };
+      console.log(this.formData);
+    }
+
+
     if (this.firstFormGroup.invalid) {
       this.firstFormGroup.get('email').markAsTouched();
       this.firstFormGroup.get('password').markAsTouched();
       return;
     }
-  }
 }
