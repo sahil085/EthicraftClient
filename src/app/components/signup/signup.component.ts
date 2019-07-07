@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AddressModel} from '../../models/address.model';
+import {AddressModel} from '../../models/Address.model';
 
 @Component({
   selector: 'app-signup',
@@ -48,7 +48,7 @@ export class SignupComponent implements OnInit {
       middleName: [this.middleName],
       lastName: [this.lastName, Validators.required],
       gender: [this.gender, Validators.required],
-    }, {validator: this.checkPasswords});
+    }, {validator: this.checkPasswords });
     this.secondFormGroup = this._formBuilder.group({
       mobileNumber: [this.mobileNumber, Validators.required],
       whatsappNumber: [this.whatsappNumber],
