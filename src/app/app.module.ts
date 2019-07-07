@@ -23,6 +23,7 @@ import {FirstFormComponent} from './components/signup/first.form/first.form.comp
 import { SecondFormComponent } from './components/signup/second.form/second.form.component';
 import { ThirdFormComponent } from './components/signup/third.form/third.form.component';
 import { FourthFormComponent } from './components/signup/fourth.form/fourth.form.component';
+import {MatCardModule} from '@angular/material/card';
 
 
 const appRoutes: Routes = [
@@ -84,6 +85,7 @@ export class XhrInterceptor implements HttpInterceptor {
     MatButtonModule,
     MatCheckboxModule,
     MatInputModule,
+    MatCardModule,
     RouterModule.forRoot(appRoutes)
   ],
   exports: [RouterModule, MatButtonModule, MatCheckboxModule],
