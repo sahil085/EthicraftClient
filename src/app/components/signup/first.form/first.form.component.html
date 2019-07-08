@@ -28,24 +28,27 @@
   </mat-form-field>
   <br/>
   <mat-form-field>
-    <input
-      matInput
-      placeholder="Gender"
-      formControlName="gender"
-      required>
+    <mat-select placeholder="Gender" formControlName="gender" required>
+      <mat-option [value]="'Male'">Male</mat-option>
+      <mat-option [value]="'Female'">Female</mat-option>
+    </mat-select>
     <mat-error *ngIf="firstFormGroup.get('gender').hasError('required')">
-      Please enter your gender
+      Please select your gender
     </mat-error>
   </mat-form-field>
   <br/>
   <mat-form-field>
     <input
       matInput
+      type="email"
       placeholder="Email"
       formControlName="email"
       required>
     <mat-error *ngIf="firstFormGroup.get('email').hasError('required')">
       Please enter your email
+    </mat-error>
+    <mat-error *ngIf="firstFormGroup.get('email').hasError('email')">
+      Please enter correct email
     </mat-error>
   </mat-form-field>
   <br/>
@@ -68,12 +71,13 @@
       formControlName="confirm"
       type="password"
       required>
+    <mat-error *ngIf="firstFormGroup.hasError('notSame')">
+      Password do not match
+    </mat-error>
     <mat-error *ngIf="firstFormGroup.get('confirm').hasError('required')">
       Please confirm your password
     </mat-error>
-    <mat-error *ngIf="firstFormGroup.hasError('notSame')">
-      Passwords do not match
-    </mat-error>
+
   </mat-form-field>
   <div>
     <button mat-button matStepperNext>Next</button>

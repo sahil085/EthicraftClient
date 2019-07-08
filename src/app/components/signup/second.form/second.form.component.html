@@ -1,6 +1,7 @@
 <form [style.fontSize.px]="16" [formGroup]="secondFormGroup">
   <mat-form-field>
-    <input
+    <input type="number"
+            maxlength="10"
       matInput
       placeholder="Contact"
       formControlName="mobileNumber"
@@ -10,7 +11,8 @@
     </mat-error>
   </mat-form-field>
   <mat-form-field>
-    <input
+    <input type="number"
+           maxlength="10"
       matInput
       placeholder="Whatsapp"
       formControlName="whatsappNumber"
@@ -18,6 +20,7 @@
   </mat-form-field>
   <div formGroupName="presentAddress">
     <h5>Present Address</h5>
+    <div class="col-md-10">
     <mat-form-field>
       <input
         matInput
@@ -28,29 +31,35 @@
         Please enter your Address
       </mat-error>
     </mat-form-field>
+    </div>
     <mat-form-field>
-      <input
-        matInput
-        placeholder="City"
-        formControlName="city"
-        required>
-      <mat-error *ngIf="secondFormGroup.get('presentAddress').get('city').hasError('required')">
-        Please enter your city
+      <mat-select placeholder="Country" formControlName="country" required>
+        <mat-option selected value="India">India</mat-option>
+      </mat-select>
+      <mat-error *ngIf="secondFormGroup.get('presentAddress').get('country').hasError('required')">
+        Please enter your country
       </mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input
-        matInput
-        placeholder="State"
-        formControlName="state"
-        required>
+      <mat-select (selectionChange)="onPresentStateChange($event)" placeholder="State" formControlName="state" required>
+        <mat-option *ngFor="let state of presentStateList" [value]="state.id">{{state.name}}</mat-option>
+      </mat-select>
       <mat-error *ngIf="secondFormGroup.get('presentAddress').get('state').hasError('required')">
         Please enter your present state
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="City" formControlName="city" required>
+        <mat-option *ngFor="let city of presentCityList" [value]="city.name">{{city.name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="secondFormGroup.get('presentAddress').get('city').hasError('required')">
+        Please enter your city
       </mat-error>
     </mat-form-field>
   </div>
   <div formGroupName="permanentAddress">
     <h5>Permanent Address</h5>
+    <div class="col-md-10">
     <mat-form-field>
       <input
         matInput
@@ -61,39 +70,33 @@
         Please enter your address
       </mat-error>
     </mat-form-field>
+    </div>
+      <mat-form-field>
+        <mat-select placeholder="Country" formControlName="country" required>
+          <mat-option selected value="India">India</mat-option>
+        </mat-select>
+        <mat-error *ngIf="secondFormGroup.get('permanentAddress').get('country').hasError('required')">
+          Please enter your country
+        </mat-error>
+      </mat-form-field>
     <mat-form-field>
-      <input
-        matInput
-        placeholder="City"
-        formControlName="city"
-        required>
-      <mat-error *ngIf="secondFormGroup.get('permanentAddress').get('city').hasError('required')">
-        Please enter your city
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <input
-        matInput
-        placeholder="State"
-        formControlName="state"
-        required>
+      <mat-select (selectionChange)="onPermanentStateChange($event)" placeholder="State" formControlName="state" required>
+        <mat-option  *ngFor="let state of permanentStateList"  [value]="state.id">{{state.name}}</mat-option>
+      </mat-select>
       <mat-error *ngIf="secondFormGroup.get('permanentAddress').get('state').hasError('required')">
         Please enter your state
       </mat-error>
     </mat-form-field>
-  </div>
-  <div>
     <mat-form-field>
-      <input
-        matInput
-        placeholder="Country"
-        formControlName="country"
-        required>
-      <mat-error *ngIf="secondFormGroup.get('country').hasError('required')">
-        Please enter your country
+      <mat-select placeholder="City" formControlName="city" required>
+        <mat-option *ngFor="let city of permanentCityList" [value]="city.name">{{city.name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="secondFormGroup.get('permanentAddress').get('city').hasError('required')">
+        Please enter your city
       </mat-error>
     </mat-form-field>
   </div>
+
   <div>
     <button mat-button matStepperPrevious>Back</button>
     <button mat-button matStepperNext>Next</button>

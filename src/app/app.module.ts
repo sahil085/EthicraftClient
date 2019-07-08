@@ -16,7 +16,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { SignupComponent } from './components/signup/signup.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material';
+import {MatInputModule, MatOptionModule, MatSelectModule} from '@angular/material';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import {CollegeRegistrationFormComponent} from './components/adminComponent/college-registration-form/college-registration-form.component';
 import {FirstFormComponent} from './components/signup/first.form/first.form.component';
@@ -25,6 +25,8 @@ import { ThirdFormComponent } from './components/signup/third.form/third.form.co
 import { FourthFormComponent } from './components/signup/fourth.form/fourth.form.component';
 import {MatCardModule} from '@angular/material/card';
 import { AssignRoleComponent } from './components/adminComponent/assign-role/assign-role.component';
+import {KeyValue} from '@angular/common';
+import {KeysPipe} from './pipe/keys-pipe';
 
 
 const appRoutes: Routes = [
@@ -73,6 +75,7 @@ export class XhrInterceptor implements HttpInterceptor {
     ThirdFormComponent,
     FourthFormComponent,
     FirstFormComponent,
+    KeysPipe,
     AssignRoleComponent
   ],
   imports: [
@@ -88,6 +91,9 @@ export class XhrInterceptor implements HttpInterceptor {
     MatCheckboxModule,
     MatInputModule,
     MatCardModule,
+    MatSelectModule,
+    MatOptionModule,
+
     RouterModule.forRoot(appRoutes)
   ],
   exports: [RouterModule, MatButtonModule, MatCheckboxModule],
