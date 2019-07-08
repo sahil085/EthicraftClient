@@ -24,6 +24,7 @@ import { SecondFormComponent } from './components/signup/second.form/second.form
 import { ThirdFormComponent } from './components/signup/third.form/third.form.component';
 import { FourthFormComponent } from './components/signup/fourth.form/fourth.form.component';
 import {MatCardModule} from '@angular/material/card';
+import { AssignRoleComponent } from './components/adminComponent/assign-role/assign-role.component';
 
 
 const appRoutes: Routes = [
@@ -71,7 +72,8 @@ export class XhrInterceptor implements HttpInterceptor {
     SecondFormComponent,
     ThirdFormComponent,
     FourthFormComponent,
-    FirstFormComponent
+    FirstFormComponent,
+    AssignRoleComponent
   ],
   imports: [
     BrowserModule,
