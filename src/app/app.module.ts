@@ -16,7 +16,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { SignupComponent } from './components/signup/signup.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material';
+import {MatAutocompleteModule, MatInputModule, MatSelectModule} from '@angular/material';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import {CollegeRegistrationFormComponent} from './components/adminComponent/college-registration-form/college-registration-form.component';
 import {FirstFormComponent} from './components/signup/first.form/first.form.component';
@@ -32,6 +32,7 @@ const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'registerCollege', component: CollegeRegistrationFormComponent},
+  {path: 'assignRole', component: AssignRoleComponent}
 ];
 
 @Injectable()
@@ -88,6 +89,9 @@ export class XhrInterceptor implements HttpInterceptor {
     MatCheckboxModule,
     MatInputModule,
     MatCardModule,
+    MatAutocompleteModule,
+    // MatSelectModule,
+    MatSelectModule,
     RouterModule.forRoot(appRoutes)
   ],
   exports: [RouterModule, MatButtonModule, MatCheckboxModule],

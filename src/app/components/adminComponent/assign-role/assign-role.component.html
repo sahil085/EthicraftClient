@@ -12,38 +12,61 @@
       </div>
 
       <div class="ibox-content">
-        <form name="assignRoleForm" id="assignRole">
+
+        <form name="assignRoleForm" id="assignRole" class="example-form">
           <div class="table-responsive">
             <table class="table">
               <thead>
               <tr>
                 <th>User Name</th>
                 <th>User Role</th>
-                <th>Entity Type</th>
-                <th>Entity Name</th>
+                <th>Colleges</th>
               </tr>
               </thead>
               <tbody>
               <tr>
                 <td>
-                  <input type="text" name="userSearchedForValue" autocomplete="off" class="typeahead_3 form-control width300" value="Select Name" required=""><ul class="typeahead dropdown-menu" style="top: 141px; left: 43px; width: 300px; display: none;"><li data-value="35" class="active"><a href="#"><strong>ra</strong>ghu.sharma@tothenew.com</a></li><li data-value="126"><a href="#">sou<strong>ra</strong>v.sharma@tothenew.com</a></li><li data-value="157"><a href="#">sou<strong>ra</strong>bh.khe<strong>ra</strong>@tothenew.com</a></li><li data-value="174"><a href="#">narend<strong>ra</strong>.sharma@tothenew.com</a></li><li data-value="213"><a href="#">siddharth.mish<strong>ra</strong>@tothenew.com</a></li><li data-value="219"><a href="#">ni<strong>ra</strong>j.sesan@tothenew.com</a></li><li data-value="222"><a href="#">amit.na<strong>ra</strong>yan@tothenew.com</a></li><li data-value="246"><a href="#">jalaj.tag<strong>ra</strong>@tothenew.com</a></li><li data-value="264"><a href="#">p<strong>ra</strong>shant.kashyap@tothenew.com</a></li><li data-value="270"><a href="#">swapan.mish<strong>ra</strong>@tothenew.com</a></li></ul>
-                  <input type="hidden" class="userSearchedFor" name="userSearchedFor.id" value="">
+                  <mat-form-field class="input-full-width">
+                    <input
+                      type="text"
+                      placeholder="Username"
+                      aria-label="Number"
+                      matInput
+                      [formControl]="username"
+                      [matAutocomplete]="auto"
+                      required
+                    >
+                    <mat-autocomplete #auto="matAutocomplete">
+                      <mat-option *ngFor="let username of filteredUsernames | async" [value]="username">
+                        {{username}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
                 </td>
                 <td>
-                  <select class="form-control width200" name="userRole" id="userRole" required=""><option value="" selected="" disabled="">No Select</option><option value="1">ROLE_ADMIN</option><option value="4">ROLE_HR_MANAGER</option><option value="5">ROLE_BU_HEAD</option><option value="7">ROLE_HRBP</option><option value="8">ROLE_FUNCTION_HEAD</option><option value="9">ROLE_HR_HEAD</option><option value="10">ROLE_CEO</option><option value="11">ROLE_ON_BOARD_SPOC</option><option value="12">ROLE_DEVELOPER</option><option value="13">ROLE_IT_TEAM</option><option value="14">ROLE_ADMIN_TEAM</option><option value="15">ROLE_DESIGN</option><option value="16">ROLE_RECRUITER</option><option value="17">ROLE_ASSET_ADMIN</option><option value="18">ROLE_ASSET_SUPER_ADMIN</option><option value="19">ROLE_FINANCE_TEAM</option><option value="20">ROLE_IT_TEAM_HARDWARE</option><option value="22">ROLE_ORDER_ADMIN</option><option value="23">ROLE_SUPER_ADMIN</option></select>
+                  <mat-form-field>
+                    <mat-label>Role</mat-label>
+                    <mat-select [formControl]="userRole" (selectionChange)="changeSelection()" required>
+                      <mat-option *ngFor="let role of roles" [value]="role">{{role}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field >
+                    <mat-label>Colleges</mat-label>
+                    <mat-select [formControl]="colleges" [disabled]="!showCollogeSelect" multiple>
+                      <mat-option *ngFor="let college of collegeList" [value]="college">{{college}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </td>
               </tr>
               <tr>
                 <td></td>
                 <td></td>
-                <td></td>
                 <td>
                   <div style="float:right">
-                    <button class="btn btn-white cancelAssignRole" type="reset" value="Reset">
-                      <strong>Cancel</strong>
-                    </button>
-                    <button class="btn btn-sm btn-primary submitAssignRole" type="submit">
-                      <strong>Submit</strong>
+                    <button class="btn btn-sm btn-primary submitAssignRole" type="submit" (click)="submitForm()">
+                      <strong>Assign Role</strong>
                     </button>
                   </div>
                 </td>
