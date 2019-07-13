@@ -16,8 +16,8 @@
     <app-fourth-form [fourthFormGroup]="fourthFormGroup"></app-fourth-form>
     <div>
       <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-      <button mat-button (click)="submitForm()">Sign Up</button>
+      <button mat-button mat-raised-button (click)="stepper.reset()">Reset</button>
+      <button mat-button mat-raised-button (click)="submitForm()">Sign Up</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>

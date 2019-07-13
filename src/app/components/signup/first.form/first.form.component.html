@@ -71,15 +71,15 @@
       formControlName="confirm"
       type="password"
       required>
-    <mat-error *ngIf="firstFormGroup.hasError('notSame')">
-      Password do not match
-    </mat-error>
     <mat-error *ngIf="firstFormGroup.get('confirm').hasError('required')">
       Please confirm your password
+    </mat-error>
+    <mat-error *ngIf="firstFormGroup.hasError('notSame')">
+      Password do not match {{firstFormGroup.hasError('notSame')}}
     </mat-error>
 
   </mat-form-field>
   <div>
-    <button mat-button matStepperNext>Next</button>
+    <button mat-button mat-raised-button matStepperNext>Next</button>
   </div>
 </form>

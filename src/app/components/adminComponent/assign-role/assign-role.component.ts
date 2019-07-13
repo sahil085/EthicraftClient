@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {userRoles} from '../../../constants';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-assign-role',
@@ -11,8 +12,8 @@ import {userRoles} from '../../../constants';
 })
 export class AssignRoleComponent implements OnInit {
 
-  username = new FormControl();
-  userRole = new FormControl();
+  username = new FormControl('', [Validators.required, Validators.email]);
+  userRole = new FormControl('', Validators.required);
   colleges = new FormControl();
   options: string[] = ['ravi.garg@tothenew.com', 'sahil.verma@tothenew.com', 'vermasahil269@gmail.com'];
   roles = [
@@ -26,7 +27,8 @@ export class AssignRoleComponent implements OnInit {
   showCollogeSelect = false;
   filteredUsernames: Observable<string[]>;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     this.filteredUsernames = this.username.valueChanges
@@ -46,11 +48,25 @@ export class AssignRoleComponent implements OnInit {
   }
 
   submitForm = () => {
-    if (this.username.value && this.userRole.value) {
-    console.log({
-      username: this.username.value,
-      role: this.userRole.value,
-      colleges: this.colleges.value || []
+    if (this.username.value && this.userRole.value && this.userRole.value !== userRoles.EEO) {
+      console.log({
+        username: this.username.value,
+        role: this.userRole.value,
+        colleges: this.colleges.value || []
+      });
+      this.showToaster('User Role assigned successfully', 'success');
+    } else if (this.userRole.value === userRoles.EEO && this.colleges.value && this.colleges.value[0]) {
+      this.showToaster('User Role assigned successfully', 'success');
+    } else {
+      this.showToaster('Please assign colleges under EEO', 'error');
+    }
+  }
+
+  showToaster = (message, type) => {
+    Swal({
+      title: message,
+      type: type,
+      timer: 1500
     });
   }
 }

@@ -11,7 +11,6 @@ export class FirstFormComponent implements OnInit {
   @Input() firstFormGroup: FormGroup;
 
   constructor() {
-    console.log(this.firstFormGroup);
   }
 
   ngOnInit() {

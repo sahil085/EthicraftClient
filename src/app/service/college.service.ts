@@ -17,7 +17,7 @@ export class CollegeService {
     return this.http.post(`${this.apiUrl}/college/register`, collegeCO);
   }
 
-  public findCollegeDropDown(): Observable<Map<number, String>>{
+  public findCollegeDropDown(): Observable<Map<number, String>> {
     return this.http.get<Map<number, String>>(`${this.apiUrl}/college/collegeDropDown`);
   }
 }

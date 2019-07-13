@@ -1,17 +1,20 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {AddressModel} from '../../models/Address.model';
 import {SignupService} from '../../service/signup.service';
 import {CollegeService} from '../../service/college.service';
 import Swal from 'sweetalert2';
 import csc from 'country-state-city';
+import {CustomValidators} from '../../Validators';
+import {ErrorStateMatcher} from '@angular/material';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
+
 export class SignupComponent implements OnInit {
 
   formData: any = [];
@@ -49,16 +52,21 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       email: [this.email, [Validators.required, Validators.email]],
-      password: [this.password, Validators.required],
-      confirm: [this.confirm, {validator: this.checkPasswords} ],
+      password: [this.password, [Validators.required]],
+      confirm: [this.confirm, Validators.required ],
       firstName: [this.firstName, Validators.required],
       middleName: [this.middleName],
       lastName: [this.lastName, Validators.required],
       gender: [this.gender, Validators.required],
-    }, {validator: this.checkPasswords });
+    }, {validator: CustomValidators.checkPasswords });
     this.secondFormGroup = this._formBuilder.group({
-      mobileNumber: [this.mobileNumber, Validators.required],
-      whatsappNumber: [this.whatsappNumber],
+      mobileNumber: [this.mobileNumber, [
+        Validators.required,
+        Validators.pattern('[6-9]\\d{9}')
+      ]],
+      whatsappNumber: [this.whatsappNumber, [
+        Validators.pattern('[6-9]\\d{9}')
+      ]],
       permanentAddress: this._formBuilder.group({
         address: ['', Validators.required],
         city: ['', Validators.required],
@@ -88,13 +96,14 @@ export class SignupComponent implements OnInit {
   this.fetchActiveCollege();
   }
 
-  fetchActiveCollege() {
-  this.collegeList = this.collegeService.findCollegeDropDown().subscribe(
+  fetchActiveCollege = () => {
+  this.collegeService.findCollegeDropDown().subscribe(
     data => {
+      console.log(this.collegeList);
       this.collegeList = data;
+      console.log(this.collegeList);
     }
   );
-  console.log(this.collegeList);
   }
 
 
@@ -151,13 +160,5 @@ export class SignupComponent implements OnInit {
       type: type,
       timer: 1500
     });
-  }
-
-  checkPasswords(group: FormGroup) { // here we have the 'passwords' group
-    const pass = group.controls.password.value;
-    const confirmPass = group.controls.confirm.value;
-    console.log(pass + ' -- ' + confirmPass);
-    console.log(pass === confirmPass ? null : { notSame: true });
-    return pass === confirmPass ? null : { notSame: true };
   }
 }

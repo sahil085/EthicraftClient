@@ -41,6 +41,12 @@
                         {{username}}
                       </mat-option>
                     </mat-autocomplete>
+                    <mat-error *ngIf="username.hasError('required')">
+                      Please select any username
+                    </mat-error>
+                    <mat-error *ngIf="username.hasError('email')">
+                      Username must be a valid email id
+                    </mat-error>
                   </mat-form-field>
                 </td>
                 <td>
@@ -49,6 +55,9 @@
                     <mat-select [formControl]="userRole" (selectionChange)="changeSelection()" required>
                       <mat-option *ngFor="let role of roles" [value]="role">{{role}}</mat-option>
                     </mat-select>
+                    <mat-error *ngIf="userRole.hasError('required')">
+                      Please select any role
+                    </mat-error>
                   </mat-form-field>
                 </td>
                 <td>

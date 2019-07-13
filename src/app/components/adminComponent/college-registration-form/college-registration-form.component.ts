@@ -72,7 +72,7 @@ export class CollegeRegistrationFormComponent implements OnInit {
   }
 
 
-  showToaster(message, type) {
+  showToaster = (message, type) => {
     Swal({
       title: message,
       type: type,
