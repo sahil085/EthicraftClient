@@ -1,2 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.full-size-div {
+  margin-left: -115px;margin-right: -40px;padding-left: -30px;padding-right: -30px;width: 120%
+}

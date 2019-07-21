@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {userRoles} from '../../../constants';
 import Swal from 'sweetalert2';
+import {AppComponent} from '../../../app.component';
 
 @Component({
   selector: 'app-assign-role',
@@ -54,11 +55,11 @@ export class AssignRoleComponent implements OnInit {
         role: this.userRole.value,
         colleges: this.colleges.value || []
       });
-      this.showToaster('User Role assigned successfully', 'success');
+      AppComponent.showToaster('User Role assigned successfully', 'success');
     } else if (this.userRole.value === userRoles.EEO && this.colleges.value && this.colleges.value[0]) {
-      this.showToaster('User Role assigned successfully', 'success');
+      AppComponent.showToaster('User Role assigned successfully', 'success');
     } else {
-      this.showToaster('Please assign colleges under EEO', 'error');
+      AppComponent.showToaster('Please assign colleges under EEO', 'error');
     }
   }
 

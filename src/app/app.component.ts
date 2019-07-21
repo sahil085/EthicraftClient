@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from '@angular/core';
 import {AuthService} from './service/auth.service';
 import {Router} from '@angular/router';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-root',
@@ -17,5 +18,13 @@ export class AppComponent {
     setInterval(() => {
       this.cd.detectChanges();
     }, 1000);
+  }
+
+  public static showToaster = (message, type) => {
+    Swal({
+      title: message,
+      type: type,
+      timer: 1500
+    });
   }
 }

@@ -3,6 +3,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CollegeService} from '../../../service/college.service';
 import Swal from 'sweetalert2';
+import {AppComponent} from '../../../app.component';
 
 
 @Component({
@@ -51,18 +52,18 @@ export class CollegeRegistrationFormComponent implements OnInit {
       this.collegeService.registerCollege(this.collegeFormGroup.value).subscribe(
         (data) => {
           if (data['errorMessage'] !== null) {
-            this.showToaster(data['errorMessage'], 'error');
+            AppComponent.showToaster(data['errorMessage'], 'error');
           } else {
-            this.showToaster(data['successMessage'], 'success');
+            AppComponent.showToaster(data['successMessage'], 'success');
           }
         }
         ,
         err => {
           if (err.status === 400) {
-            this.showToaster('Validation failed', 'error');
+            AppComponent.showToaster('Validation failed', 'error');
 
           } else {
-            this.showToaster(err['error'].message ? err['error'].message : err['error'].text, 'error');
+            AppComponent.showToaster(err['error'].message ? err['error'].message : err['error'].text, 'error');
 
           }
         }

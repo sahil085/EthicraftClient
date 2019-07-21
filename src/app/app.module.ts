@@ -25,14 +25,30 @@ import { ThirdFormComponent } from './components/signup/third.form/third.form.co
 import { FourthFormComponent } from './components/signup/fourth.form/fourth.form.component';
 import {MatCardModule} from '@angular/material/card';
 import { AssignRoleComponent } from './components/adminComponent/assign-role/assign-role.component';
-
+import {CreateActivityComponent} from './components/adminComponent/create-activity/create-activity.component';
+import {EditActivityComponent} from './components/adminComponent/edit-activity/edit-activity.component';
+import {ViewActivityComponent} from './components/adminComponent/view-activity/view-activity.component';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import { RequestActivityComponent } from './components/CAComponent/request-activity/request-activity.component';
+import {ViewCAActivityComponent} from './components/CAComponent/view-activity/view-c-a-activity.component';
+import { EditCAActivityComponent } from './components/CAComponent/edit-caactivity/edit-caactivity.component';
+import { ViewCAMembersComponent } from './components/CAComponent/view-camembers/view-camembers.component';
+import { MemberAttendanceCAComponent } from './components/CAComponent/member-attendance-ca/member-attendance-ca.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'registerCollege', component: CollegeRegistrationFormComponent},
-  {path: 'assignRole', component: AssignRoleComponent}
+  {path: 'assignRole', component: AssignRoleComponent},
+  {path: 'admin/activity/create', component: CreateActivityComponent},
+  {path: 'admin/activity/view', component: ViewActivityComponent},
+  {path: 'admin/activity/edit/:id', component: EditActivityComponent},
+  {path: 'ca/activity/request', component: RequestActivityComponent},
+  {path: 'ca/activity/view', component: ViewCAActivityComponent},
+  {path: 'ca/activity/edit/:id', component: EditCAActivityComponent},
+  {path: 'ca/member/view', component: ViewCAMembersComponent},
+  {path: 'ca/member/markAttendance/:activityId', component: MemberAttendanceCAComponent}
 ];
 
 @Injectable()
@@ -74,7 +90,15 @@ export class XhrInterceptor implements HttpInterceptor {
     ThirdFormComponent,
     FourthFormComponent,
     FirstFormComponent,
-    AssignRoleComponent
+    AssignRoleComponent,
+    CreateActivityComponent,
+    EditActivityComponent,
+    ViewActivityComponent,
+    ViewCAActivityComponent,
+    RequestActivityComponent,
+    EditCAActivityComponent,
+    ViewCAMembersComponent,
+    MemberAttendanceCAComponent
   ],
   imports: [
     BrowserModule,
@@ -90,7 +114,6 @@ export class XhrInterceptor implements HttpInterceptor {
     MatInputModule,
     MatCardModule,
     MatAutocompleteModule,
-    // MatSelectModule,
     MatSelectModule,
     RouterModule.forRoot(appRoutes)
   ],
@@ -99,7 +122,7 @@ export class XhrInterceptor implements HttpInterceptor {
     provide: HTTP_INTERCEPTORS,
     useClass: XhrInterceptor,
     multi: true
-  }, AuthService, AuthGuard],
+  }, {provide: LocationStrategy, useClass: HashLocationStrategy}, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
