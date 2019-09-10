@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {KeyValue} from '@angular/common';
+import {College} from '../../../models/college';
 
 @Component({
   selector: 'app-third-form',
@@ -10,7 +11,7 @@ import {KeyValue} from '@angular/common';
 export class ThirdFormComponent implements OnInit {
 
   @Input() thirdFormGroup: FormGroup;
-  @Input() collegeList: any ;
+  @Input() collegeList: College[] = [] ;
 
   constructor() { }
 

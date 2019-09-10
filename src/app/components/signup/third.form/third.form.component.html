@@ -1,7 +1,7 @@
 <form [style.fontSize.px]="16" [formGroup]="thirdFormGroup">
   <mat-form-field>
     <mat-select required placeholder="College Name" formControlName="collegeId">
-      <mat-option *ngFor="let college of collegeList |  keyvalue:keyComparator" [value]="college.key">{{college.value}}</mat-option>
+      <mat-option *ngFor="let college of collegeList" [value]="college.id">{{college.collegeName}}</mat-option>
     </mat-select>
     <mat-error *ngIf="thirdFormGroup.get('collegeId').hasError('required')">
       Please enter your College Name

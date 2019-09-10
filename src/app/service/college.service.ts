@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {College} from '../models/college';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class CollegeService {
     return this.http.post(`${this.apiUrl}/college/register`, collegeCO);
   }
 
-  public findCollegeDropDown(): Observable<Map<number, String>> {
-    return this.http.get<Map<number, String>>(`${this.apiUrl}/college/collegeDropDown`);
+  public findCollegeDropDown(): Observable<College[]> {
+    return this.http.get<College[]>(`${this.apiUrl}/college/collegeDropDown`);
   }
 }

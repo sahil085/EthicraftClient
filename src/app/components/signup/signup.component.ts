@@ -9,6 +9,7 @@ import csc from 'country-state-city';
 import {CustomValidators} from '../../Validators';
 import {ErrorStateMatcher} from '@angular/material';
 import {AppComponent} from '../../app.component';
+import {College} from '../../models/college';
 
 @Component({
   selector: 'app-signup',
@@ -41,7 +42,7 @@ export class SignupComponent implements OnInit {
   skills: any = '';
   inspirationSource: any = '';
   profilePic: any = '';
-  collegeList: any = [];
+  collegeList: College[] = [];
 
 
   constructor(private router: Router, private route: ActivatedRoute,
