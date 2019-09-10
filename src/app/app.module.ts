@@ -34,6 +34,7 @@ import {ViewCAActivityComponent} from './components/CAComponent/view-activity/vi
 import { EditCAActivityComponent } from './components/CAComponent/edit-caactivity/edit-caactivity.component';
 import { ViewCAMembersComponent } from './components/CAComponent/view-camembers/view-camembers.component';
 import { MemberAttendanceCAComponent } from './components/CAComponent/member-attendance-ca/member-attendance-ca.component';
+import {NgSelectModule} from '@ng-select/ng-select';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -103,6 +104,7 @@ export class XhrInterceptor implements HttpInterceptor {
   imports: [
     BrowserModule,
     FormsModule,
+    NgSelectModule,
     ReactiveFormsModule,
     HttpClientModule,
     HttpModule,

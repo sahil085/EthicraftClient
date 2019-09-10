@@ -1,5 +1,5 @@
 export class College {
 
-  name: string;
+  collegeName: string;
   id: number;
 }
