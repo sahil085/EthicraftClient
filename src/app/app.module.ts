@@ -35,6 +35,7 @@ import { EditCAActivityComponent } from './components/CAComponent/edit-caactivit
 import { ViewCAMembersComponent } from './components/CAComponent/view-camembers/view-camembers.component';
 import { MemberAttendanceCAComponent } from './components/CAComponent/member-attendance-ca/member-attendance-ca.component';
 import {NgSelectModule} from '@ng-select/ng-select';
+import {KeysPipe} from './pipe/keys-pipe';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -99,7 +100,8 @@ export class XhrInterceptor implements HttpInterceptor {
     RequestActivityComponent,
     EditCAActivityComponent,
     ViewCAMembersComponent,
-    MemberAttendanceCAComponent
+    MemberAttendanceCAComponent,
+    KeysPipe
   ],
   imports: [
     BrowserModule,

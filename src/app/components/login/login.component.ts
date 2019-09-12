@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   public password: string;
   public invalidMessage: string;
   public returnUrl: string;
-  private isLoginSubmit = false;
+  public isLoginSubmit = false;
 
   constructor(public loginService: LoginService, private fb: FormBuilder,
               private router: Router, private route: ActivatedRoute, public auth: AuthService) { }
