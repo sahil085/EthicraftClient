@@ -35,6 +35,8 @@ import { EditCAActivityComponent } from './components/CAComponent/edit-caactivit
 import { ViewCAMembersComponent } from './components/CAComponent/view-camembers/view-camembers.component';
 import { MemberAttendanceCAComponent } from './components/CAComponent/member-attendance-ca/member-attendance-ca.component';
 import {NgSelectModule} from '@ng-select/ng-select';
+import {EditCollegeComponent} from "./components/adminComponent/edit-college/edit-college.component";
+import {ViewCollegeComponent} from './components/adminComponent/view-college/view-college.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -49,7 +51,9 @@ const appRoutes: Routes = [
   {path: 'ca/activity/view', component: ViewCAActivityComponent},
   {path: 'ca/activity/edit/:id', component: EditCAActivityComponent},
   {path: 'ca/member/view', component: ViewCAMembersComponent},
-  {path: 'ca/member/markAttendance/:activityId', component: MemberAttendanceCAComponent}
+  {path: 'ca/member/markAttendance/:activityId', component: MemberAttendanceCAComponent},
+  {path: 'admin/college/edit/:id', component: EditCollegeComponent},
+  {path: 'admin/college/view', component: ViewCollegeComponent}
 ];
 
 @Injectable()
@@ -99,7 +103,9 @@ export class XhrInterceptor implements HttpInterceptor {
     RequestActivityComponent,
     EditCAActivityComponent,
     ViewCAMembersComponent,
-    MemberAttendanceCAComponent
+    MemberAttendanceCAComponent,
+    EditCollegeComponent,
+    ViewCollegeComponent
   ],
   imports: [
     BrowserModule,

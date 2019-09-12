@@ -9,16 +9,28 @@ import {College} from '../models/college';
 })
 export class CollegeService {
 
-  apiUrl: string = environment.apiUrl;
+  collegeApiUrl = `${environment.apiUrl}/college`;
 
   constructor(private http: HttpClient) { }
 
   public registerCollege(collegeCO) {
     console.log(collegeCO);
-    return this.http.post(`${this.apiUrl}/college/register`, collegeCO);
+    return this.http.post(`${this.collegeApiUrl}/register`, collegeCO);
   }
 
   public findCollegeDropDown(): Observable<College[]> {
-    return this.http.get<College[]>(`${this.apiUrl}/college/collegeDropDown`);
+    return this.http.get<College[]>(`${this.collegeApiUrl}/collegeDropDown`);
+  }
+
+  public findCollegeById(collegeId: string): Observable<College> {
+    return this.http.get<College>(`${this.collegeApiUrl}/${collegeId}`);
+  }
+
+  public findAllColleges(): Observable<College[]> {
+    return this.http.get<College[]>(`${this.collegeApiUrl}/`);
+  }
+
+  public updateCollegeInfo(collegeId, college): Observable<any> {
+    return  this.http.put<any>(`${this.collegeApiUrl}/${collegeId}`, college);
   }
 }
