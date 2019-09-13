@@ -99,6 +99,9 @@
       <mat-error *ngIf="collegeFormGroup.get('referencePersonContact').hasError('required')">
         Please enter the Referrer Contact
       </mat-error>
+      <mat-error *ngIf="collegeFormGroup.get('referencePersonContact').hasError('pattern')">
+        Invalid Contact Number
+      </mat-error>
     </mat-form-field>
     <div>
       <button mat-button (click)="submitForm()" style="background-color: #1ab394; color: white;">Add College</button>
