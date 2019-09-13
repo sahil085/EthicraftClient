@@ -12,10 +12,10 @@ import Swal from "sweetalert2";
 export class AppComponent {
   title = 'iskconErpClient';
   role: string;
-  constructor(public auth: AuthService, private cd: ChangeDetectorRef, private router: Router) {
+  constructor(public auth: AuthService, private cd: ChangeDetectorRef, public router: Router) {
     this.role = localStorage.getItem('role');
     this.cd.markForCheck();
-    setInterval(() => {
+    setTimeout(() => {
       this.cd.detectChanges();
     }, 1000);
   }

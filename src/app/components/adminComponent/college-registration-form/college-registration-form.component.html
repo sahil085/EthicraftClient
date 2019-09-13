@@ -6,6 +6,9 @@
         placeholder="College Name"
         formControlName="collegeName"
         required>
+      <mat-error *ngIf="collegeFormGroup.get('collegeName').hasError('required')">
+        Please enter the College Name
+      </mat-error>
     </mat-form-field>
     <mat-form-field>
       <input
@@ -14,6 +17,9 @@
         formControlName="collegeAbbreviation"
         required
       >
+      <mat-error *ngIf="collegeFormGroup.get('collegeAbbreviation').hasError('required')">
+        Please enter the College Abbreviation
+      </mat-error>
     </mat-form-field>
     <br/>
     <mat-form-field style="width: 60%">
@@ -22,6 +28,9 @@
         placeholder="University Name"
         formControlName="universityName"
         required>
+      <mat-error *ngIf="collegeFormGroup.get('universityName').hasError('required')">
+        Please enter the University Name
+      </mat-error>
     </mat-form-field>
     <br/>
     <mat-form-field style="width: 100%">
@@ -30,21 +39,26 @@
         placeholder="Address"
         formControlName="address"
         required>
+      <mat-error *ngIf="collegeFormGroup.get('address').hasError('required')">
+        Please enter the Address
+      </mat-error>
     </mat-form-field>
     <br/>
     <mat-form-field>
-      <input
-        matInput
-        placeholder="City"
-        formControlName="city"
-        required>
+      <mat-select (selectionChange)="onStateChange($event)" placeholder="State" formControlName="state" required>
+        <mat-option *ngFor="let state of stateList" [value]="state.id">{{state.name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="collegeFormGroup.get('state').hasError('required')">
+        Please enter your present state
+      </mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input
-        matInput
-        placeholder="State"
-        formControlName="state"
-        required>
+      <mat-select placeholder="City" formControlName="city" required>
+        <mat-option *ngFor="let city of cityList" [value]="city.name">{{city.name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="collegeFormGroup.get('city').hasError('required')">
+        Please enter your city
+      </mat-error>
     </mat-form-field>
     <br/>
     <mat-form-field style="width: 100%">
@@ -52,15 +66,18 @@
         matInput
         placeholder="Comments"
         formControlName="comments"
-        required>
+      >
     </mat-form-field>
     <br/>
     <mat-form-field>
       <input
         matInput
-        placeholder="Faculty"
+        placeholder="Faculty Name"
         formControlName="faculty"
         required>
+      <mat-error *ngIf="collegeFormGroup.get('faculty').hasError('required')">
+        Please enter the Faculty Name
+      </mat-error>
     </mat-form-field>
     <mat-form-field>
       <input
@@ -68,6 +85,9 @@
         placeholder="Referrer Name"
         formControlName="referencePersonName"
         required>
+      <mat-error *ngIf="collegeFormGroup.get('referencePersonName').hasError('required')">
+        Please enter the Referrer Name
+      </mat-error>
     </mat-form-field>
     <mat-form-field>
       <input
@@ -76,9 +96,12 @@
         formControlName="referencePersonContact"
         width="100%"
         required>
+      <mat-error *ngIf="collegeFormGroup.get('referencePersonContact').hasError('required')">
+        Please enter the Referrer Contact
+      </mat-error>
     </mat-form-field>
     <div>
-      <button mat-button (click)="submitForm()">Add College</button>
+      <button mat-button (click)="submitForm()" style="background-color: #1ab394; color: white;">Add College</button>
     </div>
   </mat-card>
 </form>
