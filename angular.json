@@ -38,7 +38,24 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": true,
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "qa": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
               "aot": true,
@@ -56,6 +73,9 @@
           "configurations": {
             "production": {
               "browserTarget": "EthicraftClient:build:production"
+            },
+            "qa": {
+              "browserTarget": "EthicraftClient:build:qa"
             }
           }
         },
@@ -109,6 +129,9 @@
           "configurations": {
             "production": {
               "devServerTarget": "EthicraftClient:serve:production"
+            },
+            "qa": {
+              "devServerTarget": "EthicraftClient:serve:qa"
             }
           }
         },
