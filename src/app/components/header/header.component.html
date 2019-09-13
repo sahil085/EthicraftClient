@@ -2,12 +2,13 @@
   <div class="row border-bottom">
     <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
       <div class="navbar-header">
-        <button  class="navbar-minimalize minimalize-styl-2 btn btn-primary " style="cursor:pointer;"><i class="fa fa-bars"></i> </button>
+        <button class="navbar-minimalize minimalize-styl-2 btn btn-primary " style="cursor:pointer;"><i
+          class="fa fa-bars"></i></button>
 
       </div>
       <ul class="nav navbar-top-links navbar-right">
         <li>
-          <a (click)="this.auth.logout()" >
+          <a (click)="this.auth.logout()">
             <i class="fa fa-sign-out"></i> Log out
           </a>
         </li>
@@ -15,10 +16,8 @@
     </nav>
 
   </div>
-  <div class="container">
-    <div class="wrapper wrapper-content animated fadeInRight full-size-div">
-   <router-outlet></router-outlet>
-    </div>
+  <div class="wrapper wrapper-content animated fadeInRight full-size-div">
+    <router-outlet></router-outlet>
   </div>
 </div>
 
