@@ -15,7 +15,7 @@ export class AppComponent {
   constructor(public auth: AuthService, private cd: ChangeDetectorRef, public router: Router) {
     this.role = localStorage.getItem('role');
     this.cd.markForCheck();
-    setTimeout(() => {
+    setInterval(() => {
       this.cd.detectChanges();
     }, 1000);
   }

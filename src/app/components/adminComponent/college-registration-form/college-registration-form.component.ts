@@ -27,12 +27,15 @@ export class CollegeRegistrationFormComponent implements OnInit {
   referencePersonContact: number;
   stateList: any[] = [];
   cityList: any[] = [];
+  loading: boolean;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
               private _formBuilder: FormBuilder,
               private collegeService: CollegeService
-  ) { }
+  ) {
+    this.loading = false;
+  }
 
   ngOnInit() {
     this.collegeFormGroup = this._formBuilder.group({
@@ -57,6 +60,7 @@ export class CollegeRegistrationFormComponent implements OnInit {
   }
 
   submitForm = () => {
+    this.loading = true;
     console.log(this.collegeFormGroup.value);
     if (this.collegeFormGroup.valid) {
       this.collegeService.registerCollege(this.collegeFormGroup.value).subscribe(
@@ -65,6 +69,10 @@ export class CollegeRegistrationFormComponent implements OnInit {
             AppComponent.showToaster(data['errorMessage'], 'error');
           } else {
             AppComponent.showToaster(data['successMessage'], 'success');
+            setTimeout(() => {
+              this.loading = false;
+              this.router.navigate(['/admin/college/view']);
+            }, 2000);
           }
         }
         ,
@@ -76,6 +84,7 @@ export class CollegeRegistrationFormComponent implements OnInit {
             AppComponent.showToaster(err['error'].message ? err['error'].message : err['error'].text, 'error');
 
           }
+          this.loading = false;
         }
       );
 

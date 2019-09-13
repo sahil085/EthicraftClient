@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Constant} from '../../constants/constant';
 
 @Component({
   selector: 'app-side-nav',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideNavComponent implements OnInit {
 
-  constructor() { }
+  username: string;
+  imgURL: string;
+
+  constructor() {
+    this.username = JSON.parse(localStorage.getItem('user')).username;
+    this.imgURL = JSON.parse(localStorage.getItem('user')).imgURL || Constant.DUMMY_MALE_PROFILE_IMG;
+  }
 
   ngOnInit() {
   }

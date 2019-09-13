@@ -31,7 +31,7 @@
             <span class="badge-danger" *ngIf="f.submitted">
               <span *ngIf="createActivityForm.get('type').hasError('required')">Activity Type is required</span>
             </span>
-            <div class="form-group"><label>Start Date</label> <input type="number" min="0" max="8"
+            <div class="form-group"><label>Start Date</label> <input type="date"
                                                                          placeholder="Enter Start Date"
                                                                          class="form-control" required
                                                                          formControlName="startDate"></div>
@@ -39,7 +39,7 @@
               <span
                 *ngIf="createActivityForm.get('startDate').hasError('required')">Start Date has Errors</span>
             </span>
-            <div class="form-group"><label>End Date</label> <input type="number" min="0" max="59"
+            <div class="form-group"><label>End Date</label> <input type="date"
                                                                            placeholder="Enter End Date"
                                                                            class="form-control" required
                                                                            formControlName="endDate"></div>
