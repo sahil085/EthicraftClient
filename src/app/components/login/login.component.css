@@ -13,3 +13,19 @@
   height: 100%;
   width: auto;
 }
+
+.container {
+  display: table;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+}
+.helper {
+  display: table-cell;
+  vertical-align: middle;
+}
+.content {
+  margin: 0 auto;
+  color: white;
+}
