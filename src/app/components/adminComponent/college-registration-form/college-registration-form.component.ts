@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CollegeService} from '../../../service/college.service';
 import Swal from 'sweetalert2';
 import {AppComponent} from '../../../app.component';
+import csc from 'country-state-city';
 
 
 @Component({
@@ -24,6 +25,8 @@ export class CollegeRegistrationFormComponent implements OnInit {
   faculty: string;
   referencePersonName: string;
   referencePersonContact: number;
+  stateList: any[] = [];
+  cityList: any[] = [];
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -39,11 +42,18 @@ export class CollegeRegistrationFormComponent implements OnInit {
       address: [this.address, Validators.required],
       city: [this.city, Validators.required],
       state: [this.state, Validators.required],
-      comments: [this.comments, Validators.required],
+      comments: [this.comments],
       faculty: [this.faculty, Validators.required],
       referencePersonName: [this.referencePersonName, Validators.required],
       referencePersonContact: [this.referencePersonContact, Validators.required]
     });
+
+    this.stateList = csc.getStatesOfCountry('101');
+
+  }
+
+  onStateChange(event) {
+    this.cityList = csc.getCitiesOfState('' + event.value);
   }
 
   submitForm = () => {
