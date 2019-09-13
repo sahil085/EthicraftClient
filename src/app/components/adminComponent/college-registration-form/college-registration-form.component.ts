@@ -45,7 +45,7 @@ export class CollegeRegistrationFormComponent implements OnInit {
       comments: [this.comments],
       faculty: [this.faculty, Validators.required],
       referencePersonName: [this.referencePersonName, Validators.required],
-      referencePersonContact: [this.referencePersonContact, Validators.required, Validators.pattern('[6-9]\\d{9}')]
+      referencePersonContact: [this.referencePersonContact, [Validators.required, Validators.pattern(/^[6-9]\d{9}$/)]]
     });
 
     this.stateList = csc.getStatesOfCountry('101');
