@@ -3,7 +3,6 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CollegeService} from '../../../service/college.service';
 import Swal from 'sweetalert2';
-import {AppComponent} from '../../../app.component';
 import csc from 'country-state-city';
 
 
@@ -61,14 +60,15 @@ export class CollegeRegistrationFormComponent implements OnInit {
 
   submitForm = () => {
     this.loading = true;
-    console.log(this.collegeFormGroup.value);
     if (this.collegeFormGroup.valid) {
+      this.collegeFormGroup.value.state = this.stateList[this.stateList.findIndex(
+        (elem) => elem.id === this.collegeFormGroup.value.state)].name;
       this.collegeService.registerCollege(this.collegeFormGroup.value).subscribe(
         (data) => {
           if (data['errorMessage'] !== null) {
-            AppComponent.showToaster(data['errorMessage'], 'error');
+            this.showToaster(data['errorMessage'], 'error');
           } else {
-            AppComponent.showToaster(data['successMessage'], 'success');
+            this.showToaster(data['successMessage'], 'success');
             setTimeout(() => {
               this.loading = false;
               this.router.navigate(['/admin/college/view']);
@@ -78,10 +78,10 @@ export class CollegeRegistrationFormComponent implements OnInit {
         ,
         err => {
           if (err.status === 400) {
-            AppComponent.showToaster('Validation failed', 'error');
+            this.showToaster('Validation failed', 'error');
 
           } else {
-            AppComponent.showToaster(err['error'].message ? err['error'].message : err['error'].text, 'error');
+            this.showToaster(err['error'].message ? err['error'].message : err['error'].text, 'error');
 
           }
           this.loading = false;
