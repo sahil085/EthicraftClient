@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CollegeService} from '../../../service/college.service';
 import Swal from 'sweetalert2';
 import csc from 'country-state-city';
+import {PageURL} from '../../../constants/pageUrls';
 
 
 @Component({
@@ -14,16 +15,6 @@ import csc from 'country-state-city';
 export class CollegeRegistrationFormComponent implements OnInit {
 
   collegeFormGroup: FormGroup;
-  collegeName: string;
-  collegeAbbreviation: string;
-  universityName: string;
-  address: string;
-  city: string;
-  state: string;
-  comments: string;
-  faculty: string;
-  referencePersonName: string;
-  referencePersonContact: number;
   stateList: any[] = [];
   cityList: any[] = [];
   loading: boolean;
@@ -38,16 +29,17 @@ export class CollegeRegistrationFormComponent implements OnInit {
 
   ngOnInit() {
     this.collegeFormGroup = this._formBuilder.group({
-      collegeName: [this.collegeName, Validators.required],
-      collegeAbbreviation: [this.collegeAbbreviation, Validators.required],
-      universityName: [this.universityName, Validators.required],
-      address: [this.address, Validators.required],
-      city: [this.city, Validators.required],
-      state: [this.state, Validators.required],
-      comments: [this.comments],
-      faculty: [this.faculty, Validators.required],
-      referencePersonName: [this.referencePersonName, Validators.required],
-      referencePersonContact: [this.referencePersonContact, [Validators.required, Validators.pattern(/^[6-9]\d{9}$/)]]
+      collegeName: ['', Validators.required],
+      collegeAbbreviation: ['', Validators.required],
+      universityName: ['', Validators.required],
+      address: ['', Validators.required],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      comments: [''],
+      faculty: ['', Validators.required],
+      referenceList: this._formBuilder.array([], Validators.required)
+      // referencePersonName: ['', Validators.required],
+      // referencePersonContact: ['', [Validators.required, Validators.pattern(/^[6-9]\d{9}$/)]]
     });
 
     this.stateList = csc.getStatesOfCountry('101');
@@ -71,7 +63,7 @@ export class CollegeRegistrationFormComponent implements OnInit {
             this.showToaster(data['successMessage'], 'success');
             setTimeout(() => {
               this.loading = false;
-              this.router.navigate(['/admin/college/view']);
+              this.router.navigate([PageURL.VIEW_COLLEGE_URL]);
             }, 2000);
           }
         }

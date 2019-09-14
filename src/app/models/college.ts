@@ -8,7 +8,12 @@ export class College {
   state: string;
   comments: string;
   faculty: string;
-  referencePersonName: string;
-  referencePersonContact: number;
+  referenceList: Reference[];
   active: boolean;
+}
+
+class Reference {
+  name: string;
+  position: string;
+  contact: string;
 }

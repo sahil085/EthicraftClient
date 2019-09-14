@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {College} from '../../../models/college';
 import csc from 'country-state-city';
 import {AppComponent} from '../../../app.component';
+import {PageURL} from '../../../constants/pageUrls';
 
 @Component({
   selector: 'app-edit-college',
@@ -43,8 +44,6 @@ export class EditCollegeComponent implements OnInit {
       this.collegeFormGroup.get('address').setValue(data.address);
       this.collegeFormGroup.get('comments').setValue(data.comments);
       this.collegeFormGroup.get('faculty').setValue(data.faculty);
-      this.collegeFormGroup.get('referencePersonName').setValue(data.referencePersonName);
-      this.collegeFormGroup.get('referencePersonContact').setValue(data.referencePersonContact);
       this.collegeFormGroup.get('state').setValue(data.state);
       this.collegeFormGroup.get('city').setValue(data.city);
       const stateId = this.stateList[this.stateList.findIndex((state) => state.name === data.state)].id;
@@ -75,7 +74,7 @@ export class EditCollegeComponent implements OnInit {
             AppComponent.showToaster(data['successMessage'], 'success');
             setTimeout(() => {
               this.loading = false;
-              this.router.navigate(['/admin/college/view']);
+              this.router.navigate([PageURL.VIEW_COLLEGE_URL]);
             }, 2000);
           }
         }, err => {
