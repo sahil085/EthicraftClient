@@ -6,7 +6,7 @@ import {HeaderComponent} from './components/header/header.component';
 import {SideNavComponent} from './components/side-nav/side-nav.component';
 import {AuthService} from './service/auth.service';
 import {HTTP_INTERCEPTORS, HttpClientModule, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {RouterModule, Routes} from '@angular/router';
+import {RouterModule} from '@angular/router';
 import {LoginComponent} from './components/login/login.component';
 import {HomeComponent} from './components/adminComponent/home/home.component';
 import {AuthGuard} from './security/auth.guard';
@@ -38,24 +38,9 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {EditCollegeComponent} from './components/adminComponent/edit-college/edit-college.component';
 import {ViewCollegeComponent} from './components/adminComponent/view-college/view-college.component';
 import {KeysPipe} from './pipe/keys-pipe';
+import {PendingMemberRequestComponent} from './components/adminComponent/pending-member-request/pending-member-request.component';
+import {appRoutes} from './app.routing';
 
-const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'signup', component: SignupComponent},
-  {path: 'registerCollege', component: CollegeRegistrationFormComponent},
-  {path: 'assignRole', component: AssignRoleComponent},
-  {path: 'admin/activity/create', component: CreateActivityComponent},
-  {path: 'admin/activity/view', component: ViewActivityComponent},
-  {path: 'admin/activity/edit/:id', component: EditActivityComponent},
-  {path: 'ca/activity/request', component: RequestActivityComponent},
-  {path: 'ca/activity/view', component: ViewCAActivityComponent},
-  {path: 'ca/activity/edit/:id', component: EditCAActivityComponent},
-  {path: 'ca/member/view', component: ViewCAMembersComponent},
-  {path: 'ca/member/markAttendance/:activityId', component: MemberAttendanceCAComponent},
-  {path: 'admin/college/edit/:id', component: EditCollegeComponent},
-  {path: 'admin/college/view', component: ViewCollegeComponent}
-];
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -107,7 +92,8 @@ export class XhrInterceptor implements HttpInterceptor {
     MemberAttendanceCAComponent,
     EditCollegeComponent,
     ViewCollegeComponent,
-    KeysPipe
+    KeysPipe,
+    PendingMemberRequestComponent
   ],
   imports: [
     BrowserModule,
