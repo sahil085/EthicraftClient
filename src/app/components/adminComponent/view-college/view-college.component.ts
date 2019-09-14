@@ -17,7 +17,6 @@ export class ViewCollegeComponent implements OnInit {
   ngOnInit() {
     this.collegeService.findAllColleges().subscribe(data => {
       this.collegeList = data;
-      console.log(JSON.stringify(data));
     });
     $('#viewCollegeTable').DataTable({
       dom: '<\'row\'<\'col-sm-2\'l><\'col-sm-5\'B><\'col-sm-5\'f>>' +

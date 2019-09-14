@@ -6,15 +6,21 @@
           <div class="dropdown profile-element">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
               <div class="side-logo-container">
-                <img style="width: 100%; height: 100%" src="{{imgURL}}">
+                <img alt="Profile Image" style="width: 100%; height: 100%" src="{{imgURL}}">
               </div>
 
-              <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{username}}</strong>
-                             </span> </span> </a>
+              <span class="clear">
+                <span class="block m-t-xs" style="text-transform: capitalize;">
+                  <strong class="font-bold">
+                    {{username}}
+                  </strong>
+                </span>
+              </span>
+            </a>
           </div>
           <div class="logo-element">
             <div class="side-logo-container" style="margin: auto;">
-              <img style="width: 100%; height: 100%" src="{{imgURL}}">
+              <img alt="Profile Image" style="width: 100%; height: 100%" src="{{imgURL}}">
             </div>
           </div>
         </li>
@@ -22,7 +28,8 @@
           <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">College</span> <span
             class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
-            <li [routerLinkActive]="['active']"><a [routerLink]="PageURL.COLLEGE_REGISTRATION_URL">Register College</a></li>
+            <li [routerLinkActive]="['active']"><a [routerLink]="PageURL.COLLEGE_REGISTRATION_URL">Register College</a>
+            </li>
             <li [routerLinkActive]="['active']"><a [routerLink]="PageURL.VIEW_COLLEGE_URL">View College</a></li>
           </ul>
         </li>
@@ -32,7 +39,8 @@
           <ul class="nav nav-second-level">
             <li [routerLinkActive]="['active']"><a [routerLink]="PageURL.SIGNUP_URL">Create Member</a></li>
             <li [routerLinkActive]="['active']"><a [routerLink]="'/instructionSet'">View Members</a></li>
-            <li [routerLinkActive]="['active']"><a [routerLink]="PageURL.PENDING_REQUEST_URL">Pending Member Request</a></li>
+            <li [routerLinkActive]="['active']"><a [routerLink]="PageURL.PENDING_REQUEST_URL">Pending Member Request</a>
+            </li>
           </ul>
         </li>
         <li>
@@ -47,7 +55,8 @@
           <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">CA Activity Panel</span> <span
             class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
-            <li [routerLinkActive]="['active']"><a [routerLink]="PageURL.REQUEST_ACTIVITY_URL">Initiate Activity</a></li>
+            <li [routerLinkActive]="['active']"><a [routerLink]="PageURL.REQUEST_ACTIVITY_URL">Initiate Activity</a>
+            </li>
             <li [routerLinkActive]="['active']"><a [routerLink]="PageURL.VIEW_CA_ACTIVITY_URL">View Activity</a></li>
           </ul>
         </li>
@@ -59,7 +68,8 @@
           </ul>
         </li>
         <li>
-          <a [routerLink]="PageURL.ASSIGN_ROLE_URL"><i class="fa fa-th-large"></i> <span class="nav-label">Assign Role</span></a>
+          <a [routerLink]="PageURL.ASSIGN_ROLE_URL"><i class="fa fa-th-large"></i> <span
+            class="nav-label">Assign Role</span></a>
         </li>
       </ul>
     </div>

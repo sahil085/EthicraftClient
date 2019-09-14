@@ -6,7 +6,6 @@ import Swal from 'sweetalert2';
 import csc from 'country-state-city';
 import {PageURL} from '../../../constants/pageUrls';
 
-
 @Component({
   selector: 'app-college-registration-form',
   templateUrl: './college-registration-form.component.html',
@@ -42,7 +41,6 @@ export class CollegeRegistrationFormComponent implements OnInit {
     });
 
     this.stateList = csc.getStatesOfCountry('101');
-    // this.patch();
   }
 
   createItem(): FormGroup {
@@ -63,21 +61,6 @@ export class CollegeRegistrationFormComponent implements OnInit {
 
   deleteRow(index: number) {
     this.formArr.removeAt(index);
-  }
-
-  // patch() {
-  //   const control = <FormArray>this.collegeFormGroup.get('referenceList');
-  //   // this.fields.type.options.forEach(x => {
-  //   //   control.push(this.patchValues(x.name, x.designation, x.contact))
-  //   // })
-  // }
-
-  patchValues(name, designation, contact) {
-    return this.formBuilder.group({
-      name: [name],
-      designation: [designation],
-      contact: [contact],
-    });
   }
 
   onStateChange(event) {
@@ -116,7 +99,6 @@ export class CollegeRegistrationFormComponent implements OnInit {
 
     }
   }
-
 
   showToaster = (message, type) => {
     Swal({
