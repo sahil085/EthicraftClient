@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CollegeService} from '../../../service/college.service';
 import Swal from 'sweetalert2';
 import csc from 'country-state-city';
@@ -18,17 +18,18 @@ export class CollegeRegistrationFormComponent implements OnInit {
   stateList: any[] = [];
   cityList: any[] = [];
   loading: boolean;
+  referenceList: FormArray;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private _formBuilder: FormBuilder,
+              private formBuilder: FormBuilder,
               private collegeService: CollegeService
   ) {
     this.loading = false;
   }
 
   ngOnInit() {
-    this.collegeFormGroup = this._formBuilder.group({
+    this.collegeFormGroup = this.formBuilder.group({
       collegeName: ['', Validators.required],
       collegeAbbreviation: ['', Validators.required],
       universityName: ['', Validators.required],
@@ -37,13 +38,46 @@ export class CollegeRegistrationFormComponent implements OnInit {
       state: ['', Validators.required],
       comments: [''],
       faculty: ['', Validators.required],
-      referenceList: this._formBuilder.array([], Validators.required)
-      // referencePersonName: ['', Validators.required],
-      // referencePersonContact: ['', [Validators.required, Validators.pattern(/^[6-9]\d{9}$/)]]
+      referenceList: this.formBuilder.array([this.createItem()], Validators.required)
     });
 
     this.stateList = csc.getStatesOfCountry('101');
+    // this.patch();
+  }
 
+  createItem(): FormGroup {
+    return this.formBuilder.group({
+      name: ['', Validators.required],
+      designation: ['', Validators.required],
+      contact: ['', Validators.required]
+    });
+  }
+
+  get formArr() {
+    return this.collegeFormGroup.get('referenceList') as FormArray;
+  }
+
+  addItem(): void {
+    this.formArr.push(this.createItem());
+  }
+
+  deleteRow(index: number) {
+    this.formArr.removeAt(index);
+  }
+
+  // patch() {
+  //   const control = <FormArray>this.collegeFormGroup.get('referenceList');
+  //   // this.fields.type.options.forEach(x => {
+  //   //   control.push(this.patchValues(x.name, x.designation, x.contact))
+  //   // })
+  // }
+
+  patchValues(name, designation, contact) {
+    return this.formBuilder.group({
+      name: [name],
+      designation: [designation],
+      contact: [contact],
+    });
   }
 
   onStateChange(event) {
