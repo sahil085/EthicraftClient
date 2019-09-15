@@ -4,7 +4,9 @@
 </div>
 
 <div  *ngIf="!this.auth.isLoggednIn() && this.router.url === '/signup'">
-  <app-signup></app-signup>
+  <div style="margin: 20px">
+    <app-signup></app-signup>
+  </div>
 </div>
 
 <div  *ngIf="this.auth.isLoggednIn()">
