@@ -1,10 +1,12 @@
+import {College} from './college';
+
 export class Member {
 
   id: number;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: String;
-  mobile: number;
-  college: string;
-  city: string;
-
+  mobileNumber: number;
+  college: College;
+  memberApproved: boolean;
 }

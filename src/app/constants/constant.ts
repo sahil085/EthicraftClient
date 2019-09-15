@@ -11,4 +11,8 @@ export class Constant {
     MEMBER: 'MEMBER'
   };
 
+  public static getAllRoles(): string[] {
+    return [this.userRoles.ADMIN, this.userRoles.CAMPUS_AMBASSADOR, this.userRoles.EEO, this.userRoles.MEMBER, this.userRoles.SUPER_ADMIN, this.userRoles.ADMIN];
+  }
+
 }

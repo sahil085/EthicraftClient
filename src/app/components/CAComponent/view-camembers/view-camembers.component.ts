@@ -37,15 +37,15 @@ export class ViewCAMembersComponent implements OnInit {
   }
 
   findAllMembersOfCA() {
-    this.memberService.findAllMembersOfCA().subscribe(
-      (data) => {
-        this.membersList = data;
-      }
-      ,
-      err => {
-        AppComponent.showToaster(err['error'].message ? err['error'].message : err['error'].text, 'error');
-      }
-    );
+    // this.memberService.findAllPendingMembers().subscribe(
+    //   (data) => {
+    //     this.membersList = data;
+    //   }
+    //   ,
+    //   err => {
+    //     AppComponent.showToaster(err['error'].message ? err['error'].message : err['error'].text, 'error');
+    //   }
+    // );
   }
 
 }

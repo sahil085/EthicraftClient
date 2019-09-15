@@ -16,8 +16,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SignupComponent} from './components/signup/signup.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatAutocompleteModule, MatInputModule, MatSelectModule} from '@angular/material';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import {MatAutocompleteModule, MatButtonModule, MatCheckboxModule, MatInputModule, MatSelectModule} from '@angular/material';
 import {CollegeRegistrationFormComponent} from './components/adminComponent/college-registration-form/college-registration-form.component';
 import {FirstFormComponent} from './components/signup/first.form/first.form.component';
 import {SecondFormComponent} from './components/signup/second.form/second.form.component';
@@ -38,23 +37,67 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {EditCollegeComponent} from './components/adminComponent/edit-college/edit-college.component';
 import {ViewCollegeComponent} from './components/adminComponent/view-college/view-college.component';
 import {KeysPipe} from './pipe/keys-pipe';
+import {PendingMembersComponent} from './components/pending-members/pending-members.component';
+import {Constant} from './constants/constant';
+import {AccessDeniedComponent} from './access-denied/access-denied.component';
+import {DashboardComponent} from './dashboard-component/dashboard.component';
+import {NgxSpinnerModule} from 'ngx-spinner';
+import {NgxLoadingModule} from 'ngx-loading';
 
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: DashboardComponent, canActivate: [AuthGuard], data: {roles: Constant.getAllRoles()}},
   {path: 'login', component: LoginComponent},
+  {path: 'sideNav', component: SideNavComponent},
+  {path: 'accessDenied', component: AccessDeniedComponent},
   {path: 'signup', component: SignupComponent},
-  {path: 'registerCollege', component: CollegeRegistrationFormComponent},
-  {path: 'assignRole', component: AssignRoleComponent},
-  {path: 'admin/activity/create', component: CreateActivityComponent},
-  {path: 'admin/activity/view', component: ViewActivityComponent},
-  {path: 'admin/activity/edit/:id', component: EditActivityComponent},
-  {path: 'ca/activity/request', component: RequestActivityComponent},
-  {path: 'ca/activity/view', component: ViewCAActivityComponent},
-  {path: 'ca/activity/edit/:id', component: EditCAActivityComponent},
-  {path: 'ca/member/view', component: ViewCAMembersComponent},
-  {path: 'ca/member/markAttendance/:activityId', component: MemberAttendanceCAComponent},
-  {path: 'admin/college/edit/:id', component: EditCollegeComponent},
-  {path: 'admin/college/view', component: ViewCollegeComponent}
+  {
+    path: 'registerCollege',
+    component: CollegeRegistrationFormComponent,
+    canActivate: [AuthGuard],
+    data: {roles: [Constant.userRoles.ADMIN]}
+  },
+  {path: 'assignRole', component: AssignRoleComponent, canActivate: [AuthGuard], data: {roles: [Constant.userRoles.ADMIN]}},
+  {path: 'admin/activity/create', component: CreateActivityComponent, canActivate: [AuthGuard], data: {roles: [Constant.userRoles.ADMIN]}},
+  {path: 'admin/activity/view', component: ViewActivityComponent, canActivate: [AuthGuard], data: {roles: [Constant.userRoles.ADMIN]}},
+  {path: 'admin/activity/edit/:id', component: EditActivityComponent, canActivate: [AuthGuard], data: {roles: [Constant.userRoles.ADMIN]}},
+  {
+    path: 'ca/activity/request',
+    component: RequestActivityComponent,
+    canActivate: [AuthGuard],
+    data: {roles: [Constant.userRoles.CAMPUS_AMBASSADOR]}
+  },
+  {
+    path: 'ca/activity/view',
+    component: ViewCAActivityComponent,
+    canActivate: [AuthGuard],
+    data: {roles: [Constant.userRoles.CAMPUS_AMBASSADOR]}
+  },
+  {
+    path: 'ca/activity/edit/:id',
+    component: EditCAActivityComponent,
+    canActivate: [AuthGuard],
+    data: {roles: [Constant.userRoles.CAMPUS_AMBASSADOR]}
+  },
+  {
+    path: 'ca/member/view',
+    component: ViewCAMembersComponent,
+    canActivate: [AuthGuard],
+    data: {roles: [Constant.userRoles.CAMPUS_AMBASSADOR]}
+  },
+  {
+    path: 'ca/member/markAttendance/:activityId',
+    component: MemberAttendanceCAComponent,
+    canActivate: [AuthGuard],
+    data: {roles: [Constant.userRoles.CAMPUS_AMBASSADOR]}
+  },
+  {path: 'admin/college/edit/:id', component: EditCollegeComponent, canActivate: [AuthGuard], data: {roles: [Constant.userRoles.ADMIN]}},
+  {path: 'admin/college/view', component: ViewCollegeComponent, canActivate: [AuthGuard], data: {roles: [Constant.userRoles.ADMIN]}},
+  {
+    path: 'pending-members',
+    component: PendingMembersComponent,
+    canActivate: [AuthGuard],
+    data: {roles: [Constant.userRoles.ADMIN, Constant.userRoles.CAMPUS_AMBASSADOR]}
+  }
 ];
 
 @Injectable()
@@ -107,7 +150,10 @@ export class XhrInterceptor implements HttpInterceptor {
     MemberAttendanceCAComponent,
     EditCollegeComponent,
     ViewCollegeComponent,
-    KeysPipe
+    KeysPipe,
+    PendingMembersComponent,
+    AccessDeniedComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -125,6 +171,7 @@ export class XhrInterceptor implements HttpInterceptor {
     MatCardModule,
     MatAutocompleteModule,
     MatSelectModule,
+    NgxLoadingModule.forRoot({}),
     RouterModule.forRoot(appRoutes)
   ],
   exports: [RouterModule, MatButtonModule, MatCheckboxModule],

@@ -1,7 +1,5 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from '@angular/core';
-import {AuthService} from './service/auth.service';
-import {Router} from '@angular/router';
-import Swal from "sweetalert2";
+import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component} from '@angular/core';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-root',
@@ -9,15 +7,12 @@ import Swal from "sweetalert2";
   styleUrls: ['./app.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent {
-  title = 'iskconErpClient';
+export class AppComponent implements AfterViewInit {
+  public loading = false;
+  title = 'Ethiccraft';
   role: string;
-  constructor(public auth: AuthService, private cd: ChangeDetectorRef, public router: Router) {
-    this.role = localStorage.getItem('role');
-    this.cd.markForCheck();
-    setTimeout(() => {
-      this.cd.detectChanges();
-    }, 1000);
+
+  constructor(private cdr: ChangeDetectorRef) {
   }
 
   public static showToaster = (message, type) => {
@@ -26,5 +21,12 @@ export class AppComponent {
       type: type,
       timer: 1500
     });
+  };
+
+  ngAfterViewInit(): void {
+    setInterval(() => {
+      this.cdr.detectChanges();
+    }, 1000);
   }
+
 }

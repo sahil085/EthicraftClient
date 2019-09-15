@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {AuthService} from '../../../service/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -6,14 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  public  isLoggedIn: boolean;
   username: string;
 
-  constructor() {
-    console.log(JSON.parse(localStorage.getItem('user')));
+  constructor(public auth: AuthService) {
   }
 
   ngOnInit() {
+   this.isLoggedIn = this.auth.isLoggednIn();
   }
 
 }

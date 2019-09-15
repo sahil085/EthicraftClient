@@ -1,6 +1,8 @@
-<div class="side-logo-container">
-  <img style="width: 100%; height: 100%" src="../../../assets/img/ethiccraft.jpg">
+
+<div  *ngIf="!isLoggedIn">
+  <router-outlet></router-outlet>
 </div>
-<div>
-  <h2>Hi, {{username}}</h2>
+<div  *ngIf="isLoggedIn">
+  <app-side-nav ></app-side-nav>
+  <app-header></app-header>
 </div>

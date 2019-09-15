@@ -1,14 +1,11 @@
+<ng-template #customLoadingTemplate>
+  <div class="custom-class">
+    <h3>
+      Loading...
+    </h3>
 
-<div  *ngIf="!this.auth.isLoggednIn() && this.router.url !== '/signup'">
-  <app-login></app-login>
-</div>
+  </div>
+</ng-template>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
 
-<div  *ngIf="!this.auth.isLoggednIn() && this.router.url === '/signup'">
-  <app-signup></app-signup>
-</div>
-
-<div  *ngIf="this.auth.isLoggednIn()">
-  <app-side-nav *ngIf="role === 'ADMIN'"></app-side-nav>
-  <app-header></app-header>
-  <router-outlet></router-outlet>
-</div>
+<app-home></app-home>
