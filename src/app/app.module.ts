@@ -37,6 +37,7 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {EditCollegeComponent} from './components/adminComponent/edit-college/edit-college.component';
 import {ViewCollegeComponent} from './components/adminComponent/view-college/view-college.component';
 import {KeysPipe} from './pipe/keys-pipe';
+import {PendingMemberRequestComponent} from './components/adminComponent/pending-member-request/pending-member-request.component';
 import {PendingMembersComponent} from './components/pending-members/pending-members.component';
 import {Constant} from './constants/constant';
 import {AccessDeniedComponent} from './access-denied/access-denied.component';

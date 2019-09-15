@@ -38,7 +38,6 @@ export class CreateActivityComponent implements OnInit {
   }
 
   create() {
-    console.log(this.createActivityForm.value);
     if (this.createActivityForm.valid) {
       this.activityService.createActivity(this.createActivityForm.value).subscribe(
         (data) => {

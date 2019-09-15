@@ -10,6 +10,7 @@ import {CustomValidators} from '../../Validators';
 import {ErrorStateMatcher} from '@angular/material';
 import {AppComponent} from '../../app.component';
 import {College} from '../../models/college';
+import {PageURL} from '../../constants/pageUrls';
 
 @Component({
   selector: 'app-signup',
@@ -101,9 +102,7 @@ export class SignupComponent implements OnInit {
   fetchActiveCollege = () => {
   this.collegeService.findCollegeDropDown().subscribe(
     data => {
-      console.log(this.collegeList);
       this.collegeList = data;
-      console.log(this.collegeList);
     }
   );
   }
@@ -120,28 +119,28 @@ export class SignupComponent implements OnInit {
         ...this.thirdFormGroup.value,
         ...this.fourthFormGroup.value
       };
-      console.log(this.formData);
       this.formData.collegeId = this.formData.collegeId * 1;
       const permanentStateId = this.formData.permanentAddress.state;
       const presentStateId = this.formData.presentAddress.state;
       this.formData.permanentAddress.state = csc.getStateById(permanentStateId).name;
       this.formData.presentAddress.state = csc.getStateById(presentStateId).name;
-      console.log(this.formData);
       this.signUpService.signUp(this.formData).subscribe(
         (data) => {
           if (data['errorMessage'] !== null) {
             AppComponent.showToaster(data['errorMessage'], 'error');
+            this.router.navigateByUrl(PageURL.SIGNUP_URL);
           } else {
             AppComponent.showToaster(data['successMessage'], 'success');
+            this.router.navigateByUrl(PageURL.HOME_URL);
           }
         },
         err => {
           if (err.status) {
             AppComponent.showToaster('Validation failed', 'error');
-
+            this.router.navigateByUrl(PageURL.SIGNUP_URL);
           } else {
             AppComponent.showToaster(err['error'].message ? err['error'].message : err['error'].text, 'error');
-
+            this.router.navigateByUrl(PageURL.SIGNUP_URL);
           }
         }
       );

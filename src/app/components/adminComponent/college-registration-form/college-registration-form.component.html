@@ -1,4 +1,4 @@
-<form [style.fontSize.px]="16" [formGroup]="collegeFormGroup">
+<form [style.fontSize.px]="16" [formGroup]="collegeFormGroup" disabled="loading" [autocomplete]="'off'" (ngSubmit)="submitForm()">
   <mat-card>
     <mat-form-field style="width: 60%">
       <input
@@ -79,29 +79,54 @@
         Please enter the Faculty Name
       </mat-error>
     </mat-form-field>
-    <mat-form-field>
-      <input
-        matInput
-        placeholder="Referrer Name"
-        formControlName="referencePersonName"
-        required>
-      <mat-error *ngIf="collegeFormGroup.get('referencePersonName').hasError('required')">
-        Please enter the Referrer Name
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <input
-        matInput
-        placeholder="Referrer Contact"
-        formControlName="referencePersonContact"
-        width="100%"
-        required>
-      <mat-error *ngIf="collegeFormGroup.get('referencePersonContact').hasError('required')">
-        Please enter the Referrer Contact
-      </mat-error>
-    </mat-form-field>
+    <br/>
+    <div formArrayName="referenceList"
+         *ngFor="let reference of formArr.controls; let i = index;">
+      <div [formGroupName]="i.toString()">
+        <mat-form-field>
+          <input
+            matInput
+            formControlName="name"
+            placeholder="Referrer Name"
+            required
+          >
+          <mat-error *ngIf="formArr.controls[i].get('name').hasError('required')">
+            Please enter the Referrer Name
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            formControlName="designation"
+            placeholder="Designation"
+            required
+          >
+          <mat-error *ngIf="formArr.controls[i].get('name').hasError('required')">
+            Please enter the Designation
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            type="number"
+            maxlength="10"
+            formControlName="contact"
+            placeholder="Contact"
+            required
+          >
+          <mat-error *ngIf="formArr.controls[i].get('name').hasError('required')">
+            Please enter the Contact
+          </mat-error>
+        </mat-form-field>
+        <button (click)="deleteRow(i)" style="background-color: #ff4444; color: white; border: 0; border-radius: 4px;">X</button>
+      </div>
+    </div>
+    <div style="background-color: #ffeecc; color: #f44; margin-bottom: 20px;" *ngIf="collegeFormGroup.get('referenceList').hasError('required')">
+      Please add at least one Referrer
+    </div>
     <div>
-      <button mat-button (click)="submitForm()" style="background-color: #1ab394; color: white;">Add College</button>
+      <button mat-button type="button" (click)="addItem()" style="background-color: #1ab394; color: white; margin-right: 20px;">Add Referrer</button>
+      <button mat-button type="submit" style="background-color: #1ab394; color: white;">Add College</button>
     </div>
   </mat-card>
 </form>

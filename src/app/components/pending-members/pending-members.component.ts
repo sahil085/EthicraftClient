@@ -19,7 +19,6 @@ export class PendingMembersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.appComponent.loading = true;
     this.findAllPendingMembers();
     setTimeout(() => {
       $('#viewPendingMemberTable').DataTable({
@@ -44,6 +43,7 @@ export class PendingMembersComponent implements OnInit {
   }
 
   findAllPendingMembers() {
+    this.appComponent.loading = true;
     this.memberService.findAllPendingMembers().subscribe(
       (data) => {
         this.membersList = data;
@@ -57,13 +57,17 @@ export class PendingMembersComponent implements OnInit {
   }
 
   approveOrDeclineMember(member: Member, approveStatus: boolean) {
+    this.appComponent.loading = true;
     this.memberService.approveOrDecline(member.id, approveStatus).subscribe((data) => {
+        this.appComponent.loading = false;
         if (data.successMessage) {
           AppComponent.showToaster(data.successMessage, data.type);
-          member.memberApproved = approveStatus;
         } else {
           AppComponent.showToaster(data.errorMessage, data.type);
         }
+        setTimeout( () => {
+          this.findAllPendingMembers();
+        }, 1000);
       },
       err => {
         AppComponent.showToaster(err['error'].message ? err['error'].message : err['error'].text, 'error');

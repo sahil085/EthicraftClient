@@ -14,7 +14,10 @@ export class SecondFormComponent implements OnInit {
   public presentStateList: any = [];
   public permanentCityList: any = [];
   public presentCityList: any = [];
-  constructor() { }
+  public sameAddress = false;
+
+  constructor() {
+  }
 
   ngOnInit() {
     this.permanentStateList = csc.getStatesOfCountry('101');
@@ -24,8 +27,24 @@ export class SecondFormComponent implements OnInit {
   onPresentStateChange(event) {
     this.presentCityList = csc.getCitiesOfState('' + event.value);
   }
+
   onPermanentStateChange(event) {
     this.permanentCityList = csc.getCitiesOfState('' + event.value);
+  }
+
+  toggleSameAddress() {
+    this.sameAddress = !this.sameAddress;
+    if (this.sameAddress) {
+      const presentAddress = this.secondFormGroup.value.presentAddress.address;
+      const presentCity = this.secondFormGroup.value.presentAddress.city;
+      const presentState = this.secondFormGroup.value.presentAddress.state;
+      const presentCountry = this.secondFormGroup.value.presentAddress.country;
+      this.permanentCityList = this.presentCityList;
+      this.secondFormGroup.get('permanentAddress').get('address').setValue(presentAddress);
+      this.secondFormGroup.get('permanentAddress').get('city').setValue(presentCity);
+      this.secondFormGroup.get('permanentAddress').get('state').setValue(presentState);
+      this.secondFormGroup.get('permanentAddress').get('country').setValue(presentCountry);
+    }
   }
 
 }

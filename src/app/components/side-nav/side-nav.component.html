@@ -6,58 +6,69 @@
           <div class="dropdown profile-element">
             <a data-toggle="dropdown" class="dropdown-toggle" >
               <div class="side-logo-container">
-                <img style="width: 100%; height: 100%" src="../../../assets/img/ethiccraft.jpg">
+                <img alt="Profile Image" style="width: 100%; height: 100%" src="{{imgURL}}">
               </div>
 
-              <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Ethiccraft Club</strong>
-                             </span> </span> </a>
+              <span class="clear">
+                <span class="block m-t-xs" style="text-transform: capitalize;">
+                  <strong class="font-bold">
+                    {{username}}
+                  </strong>
+                </span>
+              </span>
+            </a>
           </div>
           <div class="logo-element">
-            Ethiccraft
+            <div class="side-logo-container" style="margin: auto;">
+              <img alt="Profile Image" style="width: 100%; height: 100%" src="{{imgURL}}">
+            </div>
           </div>
         </li>
         <li  *ngIf="currentRole === 'ADMIN'">
           <a ><i class="fa fa-th-large"></i> <span class="nav-label">College</span> <span
             class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
-            <li [routerLinkActive]="['active']"><a routerLink="/registerCollege">Register College</a></li>
-            <li [routerLinkActive]="['active']"><a routerLink="/admin/college/view">View College</a></li>
+            <li [routerLinkActive]="['active']"><a [routerLink]="PageURL.COLLEGE_REGISTRATION_URL">Register College</a>
+            </li>
+            <li [routerLinkActive]="['active']"><a [routerLink]="PageURL.VIEW_COLLEGE_URL">View College</a></li>
           </ul>
         </li>
         <li *ngIf="currentRole === 'ADMIN' || currentRole === 'CAMPUS AMBASSADOR' ">
           <a ><i class="fa fa-th-large"></i> <span class="nav-label">Member Panel</span> <span
             class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
-            <li [routerLinkActive]="['active']"><a routerLink="/signup">Create Member</a></li>
-            <li [routerLinkActive]="['active']"><a routerLink="/instructionSet">Members List</a></li>
-            <li [routerLinkActive]="['active']"><a routerLink="/pending-members">Pending Members</a></li>
+            <li [routerLinkActive]="['active']"><a [routerLink]="PageURL.SIGNUP_URL">Create Member</a></li>
+            <li [routerLinkActive]="['active']"><a [routerLink]="PageURL.PENDING_REQUEST_URL">Pending Member Request</a>
+            </li>
           </ul>
         </li>
-        <li *ngIf="currentRole === 'ADMIN'">
+   <!--     <li *ngIf="currentRole === 'ADMIN'">
           <a ><i class="fa fa-th-large"></i> <span class="nav-label">Admin Activity Panel</span> <span
             class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
-            <li [routerLinkActive]="['active']"><a routerLink="/admin/activity/create">Crate Activity</a></li>
-            <li [routerLinkActive]="['active']"><a routerLink="/admin/activity/view">View Activity</a></li>
+            <li [routerLinkActive]="['active']"><a [routerLink]="PageURL.CREATE_ACTIVITY_URL">Crate Activity</a></li>
+            <li [routerLinkActive]="['active']"><a [routerLink]="PageURL.VIEW_ACTIVITY_URL">View Activity</a></li>
           </ul>
-        </li>
-        <li *ngIf="currentRole === 'CAMPUS AMBASSADOR'">
+        </li>-->
+ <!--       <li *ngIf="currentRole === 'CAMPUS AMBASSADOR'">
           <a ><i class="fa fa-th-large"></i> <span class="nav-label">CA Activity Panel</span> <span
             class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
-            <li [routerLinkActive]="['active']"><a routerLink="/ca/activity/request">Initiate Activity</a></li>
-            <li [routerLinkActive]="['active']"><a routerLink="/ca/activity/view">View Activity</a></li>
+            <li [routerLinkActive]="['active']"><a [routerLink]="PageURL.REQUEST_ACTIVITY_URL">Initiate Activity</a>
+            </li>
+            <li [routerLinkActive]="['active']"><a [routerLink]="PageURL.VIEW_CA_ACTIVITY_URL">View Activity</a></li>
           </ul>
         </li>
         <li *ngIf="currentRole === 'CAMPUS AMBASSADOR'">
           <a ><i class="fa fa-th-large"></i> <span class="nav-label">CA Member Panel</span> <span
             class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
-            <li [routerLinkActive]="['active']"><a routerLink="ca/member/view">View Members</a></li>
+            <li [routerLinkActive]="['active']"><a [routerLink]="PageURL.VIEW_CA_MEMBERS_URL">View Members</a></li>
           </ul>
-        </li>
+        </li>-->
         <li *ngIf="currentRole === 'ADMIN'">
-          <a routerLink="assignRole"><i class="fa fa-th-large"></i> <span class="nav-label">Assign Role</span></a>
+          <a [routerLink]="PageURL.ASSIGN_ROLE_URL"><i class="fa fa-th-large"></i> <span
+            class="nav-label">Assign Role</span></a>
         </li>
       </ul>
     </div>

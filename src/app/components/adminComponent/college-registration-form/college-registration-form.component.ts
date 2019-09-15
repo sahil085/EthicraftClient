@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CollegeService} from '../../../service/college.service';
 import Swal from 'sweetalert2';
-import {AppComponent} from '../../../app.component';
 import csc from 'country-state-city';
-
+import {PageURL} from '../../../constants/pageUrls';
 
 @Component({
   selector: 'app-college-registration-form',
@@ -15,41 +14,53 @@ import csc from 'country-state-city';
 export class CollegeRegistrationFormComponent implements OnInit {
 
   collegeFormGroup: FormGroup;
-  collegeName: string;
-  collegeAbbreviation: string;
-  universityName: string;
-  address: string;
-  city: string;
-  state: string;
-  comments: string;
-  faculty: string;
-  referencePersonName: string;
-  referencePersonContact: number;
   stateList: any[] = [];
   cityList: any[] = [];
+  loading: boolean;
+  referenceList: FormArray;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private _formBuilder: FormBuilder,
+              private formBuilder: FormBuilder,
               private collegeService: CollegeService
-  ) { }
+  ) {
+    this.loading = false;
+  }
 
   ngOnInit() {
-    this.collegeFormGroup = this._formBuilder.group({
-      collegeName: [this.collegeName, Validators.required],
-      collegeAbbreviation: [this.collegeAbbreviation, Validators.required],
-      universityName: [this.universityName, Validators.required],
-      address: [this.address, Validators.required],
-      city: [this.city, Validators.required],
-      state: [this.state, Validators.required],
-      comments: [this.comments],
-      faculty: [this.faculty, Validators.required],
-      referencePersonName: [this.referencePersonName, Validators.required],
-      referencePersonContact: [this.referencePersonContact, Validators.required]
+    this.collegeFormGroup = this.formBuilder.group({
+      collegeName: ['', Validators.required],
+      collegeAbbreviation: ['', Validators.required],
+      universityName: ['', Validators.required],
+      address: ['', Validators.required],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      comments: [''],
+      faculty: ['', Validators.required],
+      referenceList: this.formBuilder.array([this.createItem()], Validators.required)
     });
 
     this.stateList = csc.getStatesOfCountry('101');
+  }
 
+  createItem(): FormGroup {
+    return this.formBuilder.group({
+      name: ['', Validators.required],
+      designation: ['', Validators.required],
+      contact: ['', Validators.required]
+    });
+  }
+
+  get formArr() {
+    return this.collegeFormGroup.get('referenceList') as FormArray;
+  }
+
+  addItem(): void {
+    this.formArr.push(this.createItem());
+  }
+
+  deleteRow(index: number) {
+    this.formArr.removeAt(index);
   }
 
   onStateChange(event) {
@@ -57,31 +68,37 @@ export class CollegeRegistrationFormComponent implements OnInit {
   }
 
   submitForm = () => {
-    console.log(this.collegeFormGroup.value);
+    this.loading = true;
     if (this.collegeFormGroup.valid) {
+      this.collegeFormGroup.value.state = this.stateList[this.stateList.findIndex(
+        (elem) => elem.id === this.collegeFormGroup.value.state)].name;
       this.collegeService.registerCollege(this.collegeFormGroup.value).subscribe(
         (data) => {
           if (data['errorMessage'] !== null) {
-            AppComponent.showToaster(data['errorMessage'], 'error');
+            this.showToaster(data['errorMessage'], 'error');
           } else {
-            AppComponent.showToaster(data['successMessage'], 'success');
+            this.showToaster(data['successMessage'], 'success');
+            setTimeout(() => {
+              this.loading = false;
+              this.router.navigate([PageURL.VIEW_COLLEGE_URL]);
+            }, 2000);
           }
         }
         ,
         err => {
           if (err.status === 400) {
-            AppComponent.showToaster('Validation failed', 'error');
+            this.showToaster('Validation failed', 'error');
 
           } else {
-            AppComponent.showToaster(err['error'].message ? err['error'].message : err['error'].text, 'error');
+            this.showToaster(err['error'].message ? err['error'].message : err['error'].text, 'error');
 
           }
+          this.loading = false;
         }
       );
 
     }
   }
-
 
   showToaster = (message, type) => {
     Swal({

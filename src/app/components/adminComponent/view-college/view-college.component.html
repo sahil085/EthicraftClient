@@ -8,12 +8,10 @@
         <table id="viewCollegeTable" class="table table-responsive table-striped">
           <thead>
           <tr>
-            <th>College Name/th>
+            <th>College Name</th>
             <th>Address</th>
             <th>City</th>
             <th>Faculty</th>
-            <th>Referrer Name</th>
-            <th>Referrer Contact</th>
             <th>Action</th>
           </tr>
           </thead>
@@ -23,13 +21,12 @@
             <td>{{college.address}}</td>
             <td>{{college.city}}</td>
             <td>{{college.faculty}}</td>
-            <td>{{college.referencePersonName}}</td>
-            <td>{{college.referencePersonContact}}</td>
             <td>
-              <a title="Delete activity"><i class="fa fa-trash p-xs"></i></a>
+              <button class="btn btn-primary" (click)="viewReferDetails(college)">Refer Details</button>
+            <!--  <a title="Delete activity"><i class="fa fa-trash p-xs"></i></a>
               <a title="Approve Activity"><i class="fa fa-check p-xs"></i></a>
-              <a title="Decline Activity"><i class="fa fa-times p-xs"></i></a>
-              <a routerLink="/admin/college/edit/{{college.id}}" title="Edit Activity"><i class="fa fa-pencil p-xs"></i></a>
+              <a title="Decline Activity"><i class="fa fa-times p-xs"></i></a>-->
+              <a routerLink="/admin/college/edit/{{college.id}}" title="Edit College"><i class="fa fa-pencil p-xs"></i></a>
             </td>
           </tr>
           </tbody>
@@ -38,3 +35,53 @@
     </div>
   </div>
 </div>
+
+<div id="collegeReferDetailsModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">College Refer Details</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+
+              <div class="ibox-content">
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <table class="table table-responsive table-striped">
+                      <thead>
+                      <tr>
+                        <th>S.No.</th>
+                        <th>Referer Name</th>
+                        <th>Referer Designation</th>
+                        <th>Referer Contact</th>
+                      </tr>
+                      </thead>
+                      <tbody *ngIf="college">
+                      <tr *ngFor="let refer of college.referenceList; index as i;">
+                        <td>{{i + 1}}</td>
+                        <td>{{refer.name}}</td>
+                        <td>{{refer.designation}}</td>
+                        <td>{{refer.contact}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
