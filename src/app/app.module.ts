@@ -154,7 +154,8 @@ export class XhrInterceptor implements HttpInterceptor {
     KeysPipe,
     PendingMembersComponent,
     AccessDeniedComponent,
-    DashboardComponent
+    DashboardComponent,
+    PendingMemberRequestComponent
   ],
   imports: [
     BrowserModule,
