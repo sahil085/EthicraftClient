@@ -6,7 +6,7 @@ import {HeaderComponent} from './components/header/header.component';
 import {SideNavComponent} from './components/side-nav/side-nav.component';
 import {AuthService} from './service/auth.service';
 import {HTTP_INTERCEPTORS, HttpClientModule, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {RouterModule, Routes} from '@angular/router';
+import {RouterModule} from '@angular/router';
 import {LoginComponent} from './components/login/login.component';
 import {HomeComponent} from './components/adminComponent/home/home.component';
 import {AuthGuard} from './security/auth.guard';
@@ -37,76 +37,12 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {EditCollegeComponent} from './components/adminComponent/edit-college/edit-college.component';
 import {ViewCollegeComponent} from './components/adminComponent/view-college/view-college.component';
 import {KeysPipe} from './pipe/keys-pipe';
-import {PendingMemberRequestComponent} from './components/adminComponent/pending-member-request/pending-member-request.component';
 import {PendingMembersComponent} from './components/pending-members/pending-members.component';
-import {Constant} from './constants/constant';
 import {AccessDeniedComponent} from './access-denied/access-denied.component';
 import {DashboardComponent} from './dashboard-component/dashboard.component';
 import {NgxLoadingModule} from 'ngx-loading';
-import { MembersViewComponent } from './components/members-view/members-view.component';
-import {PageURL} from './constants/pageUrls';
-
-const appRoutes: Routes = [
-  {path: '', component: DashboardComponent, canActivate: [AuthGuard], data: {roles: Constant.getAllRoles()}},
-  {path: 'login', component: LoginComponent},
-  {path: 'sideNav', component: SideNavComponent},
-  {path: 'accessDenied', component: AccessDeniedComponent},
-  {path: 'signup', component: SignupComponent},
-  {
-    path: 'registerCollege',
-    component: CollegeRegistrationFormComponent,
-    canActivate: [AuthGuard],
-    data: {roles: [Constant.userRoles.ADMIN]}
-  },
-  {path: 'assignRole', component: AssignRoleComponent, canActivate: [AuthGuard], data: {roles: [Constant.userRoles.ADMIN]}},
-  {path: 'admin/activity/create', component: CreateActivityComponent, canActivate: [AuthGuard], data: {roles: [Constant.userRoles.ADMIN]}},
-  {path: 'admin/activity/view', component: ViewActivityComponent, canActivate: [AuthGuard], data: {roles: [Constant.userRoles.ADMIN]}},
-  {path: 'admin/activity/edit/:id', component: EditActivityComponent, canActivate: [AuthGuard], data: {roles: [Constant.userRoles.ADMIN]}},
-  {
-    path: 'ca/activity/request',
-    component: RequestActivityComponent,
-    canActivate: [AuthGuard],
-    data: {roles: [Constant.userRoles.CAMPUS_AMBASSADOR]}
-  },
-  {
-    path: 'ca/activity/view',
-    component: ViewCAActivityComponent,
-    canActivate: [AuthGuard],
-    data: {roles: [Constant.userRoles.CAMPUS_AMBASSADOR]}
-  },
-  {
-    path: 'ca/activity/edit/:id',
-    component: EditCAActivityComponent,
-    canActivate: [AuthGuard],
-    data: {roles: [Constant.userRoles.CAMPUS_AMBASSADOR]}
-  },
-  {
-    path: 'ca/member/view',
-    component: ViewCAMembersComponent,
-    canActivate: [AuthGuard],
-    data: {roles: [Constant.userRoles.CAMPUS_AMBASSADOR]}
-  },
-  {
-    path: 'ca/member/markAttendance/:activityId',
-    component: MemberAttendanceCAComponent,
-    canActivate: [AuthGuard],
-    data: {roles: [Constant.userRoles.CAMPUS_AMBASSADOR]}
-  },
-  {path: 'admin/college/edit/:id', component: EditCollegeComponent, canActivate: [AuthGuard], data: {roles: [Constant.userRoles.ADMIN]}},
-  {path: 'admin/college/view', component: ViewCollegeComponent, canActivate: [AuthGuard], data: {roles: [Constant.userRoles.ADMIN]}},
-  {
-    path: 'pending-members',
-    component: PendingMembersComponent,
-    canActivate: [AuthGuard],
-    data: {roles: [Constant.userRoles.ADMIN, Constant.userRoles.CAMPUS_AMBASSADOR]}
-  },
-  {
-    path: PageURL.VIEW_MEMBERS_URL,
-    component: MembersViewComponent,
-    canActivate: [AuthGuard],
-    data: {roles: [Constant.userRoles.ADMIN, Constant.userRoles.CAMPUS_AMBASSADOR]}
-  }
-];
+import {MembersViewComponent} from './components/members-view/members-view.component';
+import {appRoutes} from './app.routing';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -162,7 +98,6 @@ export class XhrInterceptor implements HttpInterceptor {
     PendingMembersComponent,
     AccessDeniedComponent,
     DashboardComponent,
-    PendingMemberRequestComponent,
     MembersViewComponent
   ],
   imports: [

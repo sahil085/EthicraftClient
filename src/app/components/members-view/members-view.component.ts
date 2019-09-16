@@ -21,7 +21,6 @@ export class MembersViewComponent implements OnInit {
   ngOnInit() {
     this.memberService.findAllMembers(UserService.getCurrentRole()).subscribe((data) => {
       this.memberList = data;
-      console.log(`members: ${JSON.stringify(data)}`);
     });
 
     setTimeout(() => {

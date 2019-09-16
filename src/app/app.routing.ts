@@ -15,13 +15,21 @@ import {ViewCAMembersComponent} from './components/CAComponent/view-camembers/vi
 import {MemberAttendanceCAComponent} from './components/CAComponent/member-attendance-ca/member-attendance-ca.component';
 import {EditCollegeComponent} from './components/adminComponent/edit-college/edit-college.component';
 import {ViewCollegeComponent} from './components/adminComponent/view-college/view-college.component';
-import {PendingMemberRequestComponent} from './components/adminComponent/pending-member-request/pending-member-request.component';
 import {MembersViewComponent} from './components/members-view/members-view.component';
+import {AuthGuard} from './security/auth.guard';
+import {Constant} from './constants/constant';
+import {SideNavComponent} from './components/side-nav/side-nav.component';
+import {AccessDeniedComponent} from './access-denied/access-denied.component';
+import {PendingMembersComponent} from './components/pending-members/pending-members.component';
 
 export const appRoutes: Routes = [
   {
     path: PageURL.HOME_URL,
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: Constant.getAllRoles()
+    }
   },
   {
     path: PageURL.LOGIN_URL,
@@ -32,59 +40,121 @@ export const appRoutes: Routes = [
     component: SignupComponent
   },
   {
+    path: PageURL.SIDE_NAV_URL,
+    component: SideNavComponent
+  },
+  {
+    path: PageURL.ACCESS_DENIED,
+    component: AccessDeniedComponent
+  },
+  {
     path: PageURL.COLLEGE_REGISTRATION_URL,
-    component: CollegeRegistrationFormComponent
+    component: CollegeRegistrationFormComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: [Constant.userRoles.ADMIN]
+    }
   },
   {
     path: PageURL.ASSIGN_ROLE_URL,
-    component: AssignRoleComponent
+    component: AssignRoleComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: [Constant.userRoles.ADMIN]
+    }
   },
   {
     path: PageURL.CREATE_ACTIVITY_URL,
-    component: CreateActivityComponent
+    component: CreateActivityComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: [Constant.userRoles.ADMIN]
+    }
   },
   {
     path: PageURL.VIEW_ACTIVITY_URL,
-    component: ViewActivityComponent
+    component: ViewActivityComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: [Constant.userRoles.ADMIN]
+    }
   },
   {
     path: PageURL.EDIT_ACTIVITY_URL,
-    component: EditActivityComponent
+    component: EditActivityComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: [Constant.userRoles.ADMIN]
+    }
   },
   {
     path: PageURL.REQUEST_ACTIVITY_URL,
-    component: RequestActivityComponent
+    component: RequestActivityComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: [Constant.userRoles.CAMPUS_AMBASSADOR]
+    }
   },
   {
     path: PageURL.VIEW_CA_ACTIVITY_URL,
-    component: ViewCAActivityComponent
+    component: ViewCAActivityComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: [Constant.userRoles.CAMPUS_AMBASSADOR]
+    }
   },
   {
     path: PageURL.EDIT_CA_ACTIVITY_URL,
-    component: EditCAActivityComponent
+    component: EditCAActivityComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: [Constant.userRoles.CAMPUS_AMBASSADOR]
+    }
   },
   {
     path: PageURL.VIEW_CA_MEMBERS_URL,
-    component: ViewCAMembersComponent
+    component: ViewCAMembersComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: [Constant.userRoles.CAMPUS_AMBASSADOR]
+    }
   },
   {
     path: PageURL.CA_MARK_ATTENDANCE_URL,
-    component: MemberAttendanceCAComponent
+    component: MemberAttendanceCAComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: [Constant.userRoles.CAMPUS_AMBASSADOR]
+    }
   },
   {
     path: PageURL.EDIT_COLLEGE_URL,
-    component: EditCollegeComponent
+    component: EditCollegeComponent,
+    canActivate: [AuthGuard], data: {
+      roles: [Constant.userRoles.ADMIN]
+    }
   },
   {
     path: PageURL.VIEW_COLLEGE_URL,
-    component: ViewCollegeComponent
+    component: ViewCollegeComponent,
+    canActivate: [AuthGuard], data: {
+      roles: [Constant.userRoles.ADMIN]
+    }
   },
   {
     path: PageURL.PENDING_REQUEST_URL,
-    component: PendingMemberRequestComponent
+    component: PendingMembersComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: [Constant.userRoles.ADMIN, Constant.userRoles.CAMPUS_AMBASSADOR]
+    }
   },
   {
     path: PageURL.VIEW_MEMBERS_URL,
-    component: MembersViewComponent
+    component: MembersViewComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: [Constant.userRoles.ADMIN, Constant.userRoles.CAMPUS_AMBASSADOR]
+    }
   }
 ];
