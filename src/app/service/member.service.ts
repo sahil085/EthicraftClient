@@ -28,4 +28,8 @@ export class MemberService {
   approveOrDecline(memberId, approveStatus): Observable<CommonResponse> {
     return this.http.put<CommonResponse>(`${this.apiUrl}/member/approveOrDecline/${memberId}/${approveStatus}`, null);
   }
+
+  findAllMembers(currentRole: string): Observable<Member[]> {
+    return this.http.get<Member[]>(`${this.apiUrl}/member/all/${currentRole}`);
+  }
 }

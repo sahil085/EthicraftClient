@@ -1,0 +1,11 @@
+.detail-label {
+  font-weight: bold;
+}
+
+table td {
+  padding: 2px 10px;
+}
+
+.detail-label:after {
+  content: ':';
+}

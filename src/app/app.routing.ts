@@ -16,6 +16,7 @@ import {MemberAttendanceCAComponent} from './components/CAComponent/member-atten
 import {EditCollegeComponent} from './components/adminComponent/edit-college/edit-college.component';
 import {ViewCollegeComponent} from './components/adminComponent/view-college/view-college.component';
 import {PendingMemberRequestComponent} from './components/adminComponent/pending-member-request/pending-member-request.component';
+import {MembersViewComponent} from './components/members-view/members-view.component';
 
 export const appRoutes: Routes = [
   {
@@ -81,5 +82,9 @@ export const appRoutes: Routes = [
   {
     path: PageURL.PENDING_REQUEST_URL,
     component: PendingMemberRequestComponent
+  },
+  {
+    path: PageURL.VIEW_MEMBERS_URL,
+    component: MembersViewComponent
   }
 ];

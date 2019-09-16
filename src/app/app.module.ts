@@ -42,8 +42,9 @@ import {PendingMembersComponent} from './components/pending-members/pending-memb
 import {Constant} from './constants/constant';
 import {AccessDeniedComponent} from './access-denied/access-denied.component';
 import {DashboardComponent} from './dashboard-component/dashboard.component';
-import {NgxSpinnerModule} from 'ngx-spinner';
 import {NgxLoadingModule} from 'ngx-loading';
+import { MembersViewComponent } from './components/members-view/members-view.component';
+import {PageURL} from './constants/pageUrls';
 
 const appRoutes: Routes = [
   {path: '', component: DashboardComponent, canActivate: [AuthGuard], data: {roles: Constant.getAllRoles()}},
@@ -96,6 +97,12 @@ const appRoutes: Routes = [
   {
     path: 'pending-members',
     component: PendingMembersComponent,
+    canActivate: [AuthGuard],
+    data: {roles: [Constant.userRoles.ADMIN, Constant.userRoles.CAMPUS_AMBASSADOR]}
+  },
+  {
+    path: PageURL.VIEW_MEMBERS_URL,
+    component: MembersViewComponent,
     canActivate: [AuthGuard],
     data: {roles: [Constant.userRoles.ADMIN, Constant.userRoles.CAMPUS_AMBASSADOR]}
   }
@@ -155,7 +162,8 @@ export class XhrInterceptor implements HttpInterceptor {
     PendingMembersComponent,
     AccessDeniedComponent,
     DashboardComponent,
-    PendingMemberRequestComponent
+    PendingMemberRequestComponent,
+    MembersViewComponent
   ],
   imports: [
     BrowserModule,

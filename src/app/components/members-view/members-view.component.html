@@ -1,0 +1,113 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="ibox">
+      <div class="ibox-title">
+        <h3>View Member</h3>
+      </div>
+      <div class="ibox-content">
+        <table id="viewMemberTable" class="table table-responsive table-striped">
+          <thead>
+          <tr>
+            <th>Member Name</th>
+            <th>Address</th>
+            <th>College</th>
+            <th>Is Approved</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let member of memberList" class="p-h-md">
+            <td>{{member.firstName}} {{member.middleName}} {{member.lastName}}</td>
+            <td>{{member.presentAddress.address}} {{member.presentAddress.city}}</td>
+            <td>{{member.college.collegeName}}</td>
+            <td>{{member.memberApproved ? 'Yes' : 'No'}}</td>
+            <td>
+              <button class="btn btn-primary" (click)="viewMemberDetails(member)">View Details</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="memberDetailsModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Member Details</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+
+              <div class="ibox-content">
+
+                <div class="row">
+                  <div class="col-md-12" *ngIf="member">
+                    <table style="width: 100%">
+                      <colgroup>
+                        <col span="1" style="width: 30%;">
+                        <col span="1" style="width: 70%;">
+                      </colgroup>
+                      <tr>
+                        <td class="detail-label">First Name</td>
+                        <td class="detail-text">{{member.firstName}}</td>
+                      </tr>
+                      <tr *ngIf="member.middleName.length!=0">
+                        <td class="detail-label">Middle Name</td>
+                        <td class="detail-text">{{member.middleName}}</td>
+                      </tr>
+                      <tr>
+                        <td class="detail-label">Last Name</td>
+                        <td class="detail-text">{{member.lastName}}</td>
+                      </tr>
+                      <tr>
+                        <td class="detail-label">Mobile Number</td>
+                        <td class="detail-text">{{member.mobileNumber}}</td>
+                      </tr>
+                      <tr>
+                        <td class="detail-label">Email Address</td>
+                        <td class="detail-text">{{member.email}}</td>
+                      </tr>
+                      <tr>
+                        <td class="detail-label">College Name</td>
+                        <td class="detail-text">{{member.college.collegeName}}</td>
+                      </tr>
+                      <tr>
+                        <td class="detail-label">Course Name</td>
+                        <td class="detail-text">{{member.courseName}}</td>
+                      </tr>
+                      <tr>
+                        <td class="detail-label">Batch</td>
+                        <td class="detail-text">{{member.batch}}</td>
+                      </tr>
+                      <tr>
+                        <td class="detail-label">Gender</td>
+                        <td class="detail-text">{{member.gender}}</td>
+                      </tr>
+                      <tr>
+                        <td class="detail-label">Hobbies</td>
+                        <td class="detail-text">{{member.hobbies || 'N/A'}}</td>
+                      </tr>
+                      <tr>
+                        <td class="detail-label">Achievements</td>
+                        <td class="detail-text">{{member.achievements || 'N/A'}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

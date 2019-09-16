@@ -23,4 +23,5 @@ export class PageURL {
   public static CA_MARK_ATTENDANCE_URL = `ca/member/markAttendance/:activityId`;
 
   public static VIEW_CA_MEMBERS_URL = `ca/member/view`;
+  public static VIEW_MEMBERS_URL = `memberList`;
 }
