@@ -5,6 +5,7 @@ import {AppComponent} from '../../../app.component';
 import {MatSort, MatTableDataSource} from '@angular/material';
 import {PageURL} from '../../../constants/pageUrls';
 import {Router} from '@angular/router';
+import {ExcelService} from '../../../service/excel.service';
 
 declare let $: any;
 
@@ -26,7 +27,8 @@ export class ViewCollegeComponent implements OnInit {
   constructor(
     private collegeService: CollegeService,
     private appComponent: AppComponent,
-    private router: Router
+    private router: Router,
+    private excelService: ExcelService
   ) {}
 
   ngOnInit() {
@@ -47,6 +49,10 @@ export class ViewCollegeComponent implements OnInit {
   viewDetails(college: College) {
     this.college = college;
   $('#collegeReferDetailsModal').modal('show');
+  }
+
+  exportXlsx() {
+    this.excelService.exportAsExcelFile(this.collegeList, 'CollegeList');
   }
 
   applyFilter(filterValue: string) {

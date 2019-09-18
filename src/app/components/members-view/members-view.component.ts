@@ -4,6 +4,7 @@ import {UserService} from '../../service/user.service';
 import {Member} from '../../models/member';
 import {College} from '../../models/college';
 import {MatSort, MatTableDataSource} from '@angular/material';
+import {ExcelService} from '../../service/excel.service';
 
 declare let $: any;
 
@@ -21,7 +22,10 @@ export class MembersViewComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private memberService: MemberService) { }
+  constructor(
+    private memberService: MemberService,
+    private excelService: ExcelService
+  ) { }
 
   ngOnInit() {
     this.memberService.findAllMembers(UserService.getCurrentRole()).subscribe((data) => {
@@ -33,6 +37,10 @@ export class MembersViewComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  exportXlsx() {
+    this.excelService.exportAsExcelFile(this.memberList, 'MemberList');
   }
 
   viewMemberDetails(member: Member) {

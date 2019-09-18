@@ -10,6 +10,7 @@
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
           </label>
         </mat-form-field>
+        <button (click)="exportXlsx()">Excel</button>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
           <ng-container matColumnDef="firstName">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Name</th>
