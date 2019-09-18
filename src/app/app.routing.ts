@@ -1,5 +1,4 @@
 import {Routes} from '@angular/router';
-import {HomeComponent} from './components/adminComponent/home/home.component';
 import {PageURL} from './constants/pageUrls';
 import {LoginComponent} from './components/login/login.component';
 import {SignupComponent} from './components/signup/signup.component';
@@ -21,11 +20,12 @@ import {Constant} from './constants/constant';
 import {SideNavComponent} from './components/side-nav/side-nav.component';
 import {AccessDeniedComponent} from './access-denied/access-denied.component';
 import {PendingMembersComponent} from './components/pending-members/pending-members.component';
+import {DashboardComponent} from './dashboard-component/dashboard.component';
 
 export const appRoutes: Routes = [
   {
     path: PageURL.HOME_URL,
-    component: HomeComponent,
+    component: DashboardComponent,
     canActivate: [AuthGuard],
     data: {
       roles: Constant.getAllRoles()

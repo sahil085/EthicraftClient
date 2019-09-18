@@ -1,7 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {CollegeService} from '../../../service/college.service';
 import {College} from '../../../models/college';
 import {AppComponent} from '../../../app.component';
+import {MatSort, MatTableDataSource} from '@angular/material';
+import {PageURL} from '../../../constants/pageUrls';
+import {Router} from '@angular/router';
 
 declare let $: any;
 
@@ -14,43 +17,39 @@ export class ViewCollegeComponent implements OnInit {
 
   collegeList: College[] = [];
   college: College;
+  dataSource = new MatTableDataSource();
+  displayedColumns: string[] = ['collegeName', 'collegeAbbreviation', 'address', 'city', 'actions'];
+  PageURL = PageURL.EDIT_COLLEGE_URL.slice(0, -3);
 
-  constructor(private collegeService: CollegeService, private appComponent: AppComponent) {
-  }
+  @ViewChild(MatSort) sort: MatSort;
+
+  constructor(
+    private collegeService: CollegeService,
+    private appComponent: AppComponent,
+    private router: Router
+  ) {}
 
   ngOnInit() {
+
     this.appComponent.loading = true;
     this.collegeService.findAllColleges().subscribe(data => {
       this.collegeList = data;
       this.appComponent.loading = false;
+      this.dataSource = new MatTableDataSource(this.collegeList);
+      this.dataSource.sort = this.sort;
     });
-
-    setTimeout(() => {
-      $('#viewCollegeTable').DataTable({
-        dom: '<\'row\'<\'col-sm-2\'l><\'col-sm-5\'B><\'col-sm-5\'f>>' +
-          '<\'row\'<\'col-sm-12\'tr>>' +
-          '<\'row\'<\'col-sm-5\'i><\'col-sm-7\'p>>',
-        lengthMenu: [
-          [10, 25, 50, -1],
-          ['10', '25', '50', 'Show all']
-        ],
-
-        buttons: [
-          {
-            extend: 'excel',
-            exportOptions: {
-              columns: [0, 1, 2, 3, 4, 5]
-            }
-          }
-        ]
-      });
-    }, 1000);
-
   }
 
-  viewReferDetails(college: College) {
+  editDetails(id: string) {
+    this.router.navigateByUrl(this.PageURL + id);
+  }
+
+  viewDetails(college: College) {
     this.college = college;
   $('#collegeReferDetailsModal').modal('show');
   }
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }

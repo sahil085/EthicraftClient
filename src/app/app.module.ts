@@ -16,7 +16,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SignupComponent} from './components/signup/signup.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatAutocompleteModule, MatButtonModule, MatCheckboxModule, MatInputModule, MatSelectModule} from '@angular/material';
+import {
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatCheckboxModule,
+  MatInputModule, MatPaginatorModule,
+  MatSelectModule, MatSortModule,
+  MatTableModule
+} from '@angular/material';
 import {CollegeRegistrationFormComponent} from './components/adminComponent/college-registration-form/college-registration-form.component';
 import {FirstFormComponent} from './components/signup/first.form/first.form.component';
 import {SecondFormComponent} from './components/signup/second.form/second.form.component';
@@ -117,7 +124,10 @@ export class XhrInterceptor implements HttpInterceptor {
     MatAutocompleteModule,
     MatSelectModule,
     NgxLoadingModule.forRoot({}),
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   exports: [RouterModule, MatButtonModule, MatCheckboxModule],
   providers: [{
