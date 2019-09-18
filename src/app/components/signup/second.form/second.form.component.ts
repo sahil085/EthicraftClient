@@ -44,6 +44,9 @@ export class SecondFormComponent implements OnInit {
       this.secondFormGroup.get('permanentAddress').get('city').setValue(presentCity);
       this.secondFormGroup.get('permanentAddress').get('state').setValue(presentState);
       this.secondFormGroup.get('permanentAddress').get('country').setValue(presentCountry);
+      this.secondFormGroup.get('permanentAddress').disable();
+    } else {
+      this.secondFormGroup.get('permanentAddress').enable();
     }
   }
 

@@ -78,7 +78,7 @@
     </mat-form-field>
     <mat-form-field class="width30">
       <mat-select placeholder="Country" formControlName="country" required>
-        <mat-option selected value="India">India</mat-option>
+        <mat-option value="India">India</mat-option>
       </mat-select>
       <mat-error *ngIf="secondFormGroup.get('permanentAddress').get('country').hasError('required')">
         Please enter your country

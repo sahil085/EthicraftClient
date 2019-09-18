@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {KeyValue} from '@angular/common';
 import {College} from '../../../models/college';
 
 @Component({
@@ -11,15 +10,17 @@ import {College} from '../../../models/college';
 export class ThirdFormComponent implements OnInit {
 
   @Input() thirdFormGroup: FormGroup;
-  @Input() collegeList: College[] = [] ;
+  @Input() collegeList: College[] = [];
+  newCollegeEntry: boolean;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
-  keyComparator(a: KeyValue<number, String>, b: KeyValue<number, String>) {
-    return 0;
+  setOtherCollege(value) {
+    this.newCollegeEntry = value === 'College Name and City';
   }
 
 }

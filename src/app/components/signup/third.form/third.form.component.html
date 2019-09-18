@@ -1,7 +1,8 @@
 <form [style.fontSize.px]="16" [formGroup]="thirdFormGroup" [autocomplete]="'off'">
   <mat-form-field>
-    <mat-select required placeholder="College Name" formControlName="collegeId">
+    <mat-select required placeholder="College Name" formControlName="collegeId" (selectionChange)="setOtherCollege($event.value)" #college>
       <mat-option *ngFor="let college of collegeList" [value]="college.id">{{college.collegeName}}</mat-option>
+      <mat-option [value]="'College Name and City'">Any Other</mat-option>
     </mat-select>
     <mat-error *ngIf="thirdFormGroup.get('collegeId').hasError('required')">
       Please enter your College Name
@@ -19,15 +20,25 @@
   </mat-form-field>
   <mat-form-field>
     <mat-select required placeholder="Batch" formControlName="batch">
-      <mat-option [value]="2020">2020</mat-option>
-      <mat-option [value]="2019">2019</mat-option>
-      <mat-option [value]="2018">2018</mat-option>
-      <mat-option [value]="2017">2017</mat-option>
+      <mat-option [value]="'2019-2020'">2019-2020</mat-option>
+      <mat-option [value]="'2018-2019'">2018-2019</mat-option>
+      <mat-option [value]="'2017-2018'">2017-2018</mat-option>
+      <mat-option [value]="'2016-2017'">2016-2017</mat-option>
     </mat-select>
     <mat-error *ngIf="thirdFormGroup.get('batch').hasError('required')">
       Please enter your batch
     </mat-error>
   </mat-form-field>
+  <ng-container *ngIf="college.value == 'College Name and City'">
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="College Name and City"
+        formControlName="collegeId"
+        required
+      >
+    </mat-form-field>
+  </ng-container>
   <div>
     <button mat-button mat-raised-button matStepperPrevious>Back</button>
     <button mat-button mat-raised-button matStepperNext>Next</button>
