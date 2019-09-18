@@ -2,10 +2,22 @@
   font-weight: bold;
 }
 
-table td {
-  padding: 2px 10px;
-}
-
 .detail-label:after {
   content: ':';
+}
+
+.ibox-content > table {
+  width: 100%;
+}
+
+i:hover {
+  cursor: pointer;
+  background-color: #222222;
+  color: white;
+}
+
+.p-xs {
+  font-size: 20px;
+  padding: 4px;
+  margin: 2px;
 }

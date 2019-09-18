@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MemberService} from '../../service/member.service';
 import {UserService} from '../../service/user.service';
 import {Member} from '../../models/member';
 import {College} from '../../models/college';
+import {MatSort, MatTableDataSource} from '@angular/material';
 
 declare let $: any;
 
@@ -15,34 +16,23 @@ export class MembersViewComponent implements OnInit {
 
   memberList: Member[];
   member: Member;
+  dataSource = new MatTableDataSource();
+  displayedColumns: string[] = ['firstName', 'presentAddress.address', 'college.collegeName', 'memberApproved', 'actions'];
+
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private memberService: MemberService) { }
 
   ngOnInit() {
     this.memberService.findAllMembers(UserService.getCurrentRole()).subscribe((data) => {
       this.memberList = data;
+      this.dataSource = new MatTableDataSource(this.memberList);
+      this.dataSource.sort = this.sort;
     });
+  }
 
-    setTimeout(() => {
-      $('#viewMemberTable').DataTable({
-        dom: '<\'row\'<\'col-sm-2\'l><\'col-sm-5\'B><\'col-sm-5\'f>>' +
-          '<\'row\'<\'col-sm-12\'tr>>' +
-          '<\'row\'<\'col-sm-5\'i><\'col-sm-7\'p>>',
-        lengthMenu: [
-          [10, 25, 50, -1],
-          ['10', '25', '50', 'Show all']
-        ],
-
-        buttons: [
-          {
-            extend: 'excel',
-            exportOptions: {
-              columns: [0, 1, 2, 3, 4, 5]
-            }
-          }
-        ]
-      });
-    }, 1000);
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   viewMemberDetails(member: Member) {

@@ -5,28 +5,64 @@
         <h3>View Member</h3>
       </div>
       <div class="ibox-content">
-        <table id="viewMemberTable" class="table table-responsive table-striped">
-          <thead>
-          <tr>
-            <th>Member Name</th>
-            <th>Address</th>
-            <th>College</th>
-            <th>Is Approved</th>
-            <th>Action</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let member of memberList" class="p-h-md">
-            <td>{{member.firstName}} {{member.middleName}} {{member.lastName}}</td>
-            <td>{{member.presentAddress.address}} {{member.presentAddress.city}}</td>
-            <td>{{member.college.collegeName}}</td>
-            <td>{{member.memberApproved ? 'Yes' : 'No'}}</td>
-            <td>
-              <button class="btn btn-primary" (click)="viewMemberDetails(member)">View Details</button>
+        <mat-form-field>
+          <label style="font-weight: normal">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          </label>
+        </mat-form-field>
+        <!--        <table id="viewMemberTable" class="table table-responsive table-striped">-->
+        <!--          <thead>-->
+        <!--          <tr>-->
+        <!--            <th>Member Name</th>-->
+        <!--            <th>Address</th>-->
+        <!--            <th>College</th>-->
+        <!--            <th>Is Approved</th>-->
+        <!--            <th>Action</th>-->
+        <!--          </tr>-->
+        <!--          </thead>-->
+        <!--          <tbody>-->
+        <!--          <tr *ngFor="let member of memberList" class="p-h-md">-->
+        <!--            <td>{{member.firstName}} {{member.middleName}} {{member.lastName}}</td>-->
+        <!--            <td>{{member.presentAddress.address}} {{member.presentAddress.city}}</td>-->
+        <!--            <td>{{member.college.collegeName}}</td>-->
+        <!--            <td>{{member.memberApproved ? 'Yes' : 'No'}}</td>-->
+        <!--            <td>-->
+        <!--              <button class="btn btn-primary" (click)="viewMemberDetails(member)">View Details</button>-->
+        <!--            </td>-->
+        <!--          </tr>-->
+        <!--          </tbody>-->
+        <!--        </table>-->
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+          <ng-container matColumnDef="firstName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name</th>
+            <td mat-cell *matCellDef="let member"> {{member.firstName}} {{member.lastName}}</td>
+          </ng-container>
+          <ng-container matColumnDef="presentAddress.address">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Address</th>
+            <td mat-cell *matCellDef="let member"> {{member.presentAddress.address}} {{member.presentAddress.city}}</td>
+          </ng-container>
+          <ng-container matColumnDef="college.collegeName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> College</th>
+            <td mat-cell *matCellDef="let member"> {{member.college.collegeName}} </td>
+          </ng-container>
+          <ng-container matColumnDef="memberApproved">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Is Approved</th>
+            <td mat-cell *matCellDef="let member"> {{member.memberApproved ? 'Yes' : 'No'}} </td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions</th>
+            <td mat-cell *matCellDef="let member">
+              <i
+                class="fa fa-info-circle p-xs"
+                title="View Details"
+                (click)="viewMemberDetails(member)">
+              </i>
             </td>
-          </tr>
-          </tbody>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
       </div>
     </div>
   </div>
@@ -76,7 +112,7 @@
                         <td class="detail-text">{{member.email}}</td>
                       </tr>
                       <tr>
-                        <td class="detail-label">College Name</td>
+                        <td class="detail-label">Member Name</td>
                         <td class="detail-text">{{member.college.collegeName}}</td>
                       </tr>
                       <tr>

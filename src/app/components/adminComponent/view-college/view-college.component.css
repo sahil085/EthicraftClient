@@ -4,5 +4,16 @@
 
 .mat-form-field {
   font-size: 14px;
-  width: 100%;
+}
+
+i:hover {
+  cursor: pointer;
+  background-color: #222222;
+  color: white;
+}
+
+.p-xs {
+  font-size: 20px;
+  padding: 4px;
+  margin: 2px;
 }
