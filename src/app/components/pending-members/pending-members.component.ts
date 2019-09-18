@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Member} from '../../models/member';
 import {MemberService} from '../../service/member.service';
 import {AppComponent} from '../../app.component';
+import {MatSort, MatTableDataSource} from '@angular/material';
 
 declare let $: any;
 
@@ -12,34 +13,19 @@ declare let $: any;
 })
 export class PendingMembersComponent implements OnInit {
 
-
   membersList: Member[] = [];
+  dataSource = new MatTableDataSource();
+  displayedColumns: string[] = ['firstName', 'email', 'mobileNumber', 'college.collegeName', 'actions'];
 
-  constructor(public memberService: MemberService, private appComponent: AppComponent) {
-  }
+  @ViewChild(MatSort) sort: MatSort;
+
+  constructor(
+    public memberService: MemberService,
+    private appComponent: AppComponent
+  ) {}
 
   ngOnInit() {
     this.findAllPendingMembers();
-    setTimeout(() => {
-      $('#viewPendingMemberTable').DataTable({
-        dom: '<\'row\'<\'col-sm-2\'l><\'col-sm-5\'B><\'col-sm-5\'f>>' +
-          '<\'row\'<\'col-sm-12\'tr>>' +
-          '<\'row\'<\'col-sm-5\'i><\'col-sm-7\'p>>',
-        lengthMenu: [
-          [10, 25, 50, -1],
-          ['10', '25', '50', 'Show all']
-        ],
-
-        buttons: [
-          {
-            extend: 'excel',
-            exportOptions: {
-              columns: [0, 1, 2, 3, 4, 5]
-            }
-          }
-        ]
-      });
-    }, 1000);
   }
 
   findAllPendingMembers() {
@@ -47,6 +33,8 @@ export class PendingMembersComponent implements OnInit {
     this.memberService.findAllPendingMembers().subscribe(
       (data) => {
         this.membersList = data;
+        this.dataSource = new MatTableDataSource(this.membersList);
+        this.dataSource.sort = this.sort;
         this.appComponent.loading = false;
       }
       ,
@@ -65,7 +53,7 @@ export class PendingMembersComponent implements OnInit {
         } else {
           AppComponent.showToaster(data.errorMessage, data.type);
         }
-        setTimeout( () => {
+        setTimeout(() => {
           this.findAllPendingMembers();
         }, 1000);
       },
@@ -73,6 +61,10 @@ export class PendingMembersComponent implements OnInit {
         AppComponent.showToaster(err['error'].message ? err['error'].message : err['error'].text, 'error');
       }
     );
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }

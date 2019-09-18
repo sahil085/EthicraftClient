@@ -10,28 +10,6 @@
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
           </label>
         </mat-form-field>
-        <!--        <table id="viewMemberTable" class="table table-responsive table-striped">-->
-        <!--          <thead>-->
-        <!--          <tr>-->
-        <!--            <th>Member Name</th>-->
-        <!--            <th>Address</th>-->
-        <!--            <th>College</th>-->
-        <!--            <th>Is Approved</th>-->
-        <!--            <th>Action</th>-->
-        <!--          </tr>-->
-        <!--          </thead>-->
-        <!--          <tbody>-->
-        <!--          <tr *ngFor="let member of memberList" class="p-h-md">-->
-        <!--            <td>{{member.firstName}} {{member.middleName}} {{member.lastName}}</td>-->
-        <!--            <td>{{member.presentAddress.address}} {{member.presentAddress.city}}</td>-->
-        <!--            <td>{{member.college.collegeName}}</td>-->
-        <!--            <td>{{member.memberApproved ? 'Yes' : 'No'}}</td>-->
-        <!--            <td>-->
-        <!--              <button class="btn btn-primary" (click)="viewMemberDetails(member)">View Details</button>-->
-        <!--            </td>-->
-        <!--          </tr>-->
-        <!--          </tbody>-->
-        <!--        </table>-->
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
           <ng-container matColumnDef="firstName">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Name</th>
