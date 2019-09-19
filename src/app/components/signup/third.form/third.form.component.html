@@ -34,9 +34,12 @@
       <input
         matInput
         placeholder="College Name and City"
-        formControlName="collegeId"
+        formControlName="unregisteredCollege"
         required
       >
+      <mat-error *ngIf="thirdFormGroup.get('unregisteredCollege').hasError('required')">
+        Please enter your College Name
+      </mat-error>
     </mat-form-field>
   </ng-container>
   <div>

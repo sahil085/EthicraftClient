@@ -21,6 +21,11 @@ export class ThirdFormComponent implements OnInit {
 
   setOtherCollege(value) {
     this.newCollegeEntry = value === 'College Name and City';
+    if (this.newCollegeEntry) {
+      this.thirdFormGroup.get('unregisteredCollege').enable();
+    } else {
+      this.thirdFormGroup.get('unregisteredCollege').disable();
+    }
   }
 
 }
