@@ -118,7 +118,7 @@
             Please enter the Contact
           </mat-error>
         </mat-form-field>
-        <button (click)="deleteRow(i)" style="background-color: #ff4444; color: white; border: 0; border-radius: 4px;">X</button>
+        <button (click)="deleteRow(i)" style="background-color: #ff4444; color: white; border: 0; border-radius: 4px; font-weight: bolder;">&times;</button>
       </div>
     </div>
     <div style="background-color: #ffeecc; color: #f44; margin-bottom: 20px;" *ngIf="collegeFormGroup.get('referenceList').hasError('required')">
