@@ -23,20 +23,6 @@ export class SignupComponent implements OnInit {
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
   fourthFormGroup: FormGroup;
-  email: any = '';
-  password: any = '';
-  confirm: any = '';
-  firstName: any = '';
-  middleName: any = '';
-  lastName: any = '';
-  mobileNumber: number;
-  whatsappNumber: number;
-  country = '';
-  gender = '';
-  batch = '';
-  achievements = '';
-  hobbies = '';
-  skills = '';
   collegeList: College[] = [];
 
   @ViewChild('stepper') stepper;
@@ -49,33 +35,33 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
-      email: [this.email, [Validators.required, Validators.email]],
-      password: [this.password, [Validators.required]],
-      confirm: [this.confirm, Validators.required],
-      firstName: [this.firstName, Validators.required],
-      middleName: [this.middleName],
-      lastName: [this.lastName, Validators.required],
-      gender: [this.gender, Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+      confirm: ['', Validators.required],
+      firstName: ['', Validators.required],
+      middleName: [''],
+      lastName: ['', Validators.required],
+      gender: ['', Validators.required],
     }, {validator: CustomValidators.checkPasswords});
     this.secondFormGroup = this._formBuilder.group({
-      mobileNumber: [this.mobileNumber, [
+      mobileNumber: ['', [
         Validators.required,
         Validators.pattern('[6-9]\\d{9}')
       ]],
-      whatsappNumber: [this.whatsappNumber, [
+      whatsappNumber: ['', [
         Validators.pattern('[6-9]\\d{9}')
       ]],
       permanentAddress: this._formBuilder.group({
         address: ['', Validators.required],
         city: ['', Validators.required],
         state: ['', Validators.required],
-        country: [this.country, Validators.required]
+        country: ['', Validators.required]
       }),
       presentAddress: this._formBuilder.group({
         address: ['', Validators.required],
         city: ['', Validators.required],
         state: ['', Validators.required],
-        country: [this.country, Validators.required]
+        country: ['', Validators.required]
       }),
     });
     this.thirdFormGroup = this._formBuilder.group({
