@@ -31,7 +31,8 @@ export class SignupComponent implements OnInit {
               private route: ActivatedRoute,
               private signUpService: SignupService,
               private collegeService: CollegeService,
-              private _formBuilder: FormBuilder) {  }
+              private _formBuilder: FormBuilder) {
+  }
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -87,11 +88,11 @@ export class SignupComponent implements OnInit {
         this.collegeList = data;
       }
     );
-  }
+  };
 
   submitForm = () => {
     if (this.firstFormGroup.invalid || this.secondFormGroup.invalid || this.thirdFormGroup.invalid || this.fourthFormGroup.invalid) {
-
+      console.log('invalid', this.secondFormGroup.invalid);
     } else {
       this.secondFormGroup.get('permanentAddress').enable();
       this.formData = {
@@ -100,17 +101,16 @@ export class SignupComponent implements OnInit {
         ...this.thirdFormGroup.value,
         ...this.fourthFormGroup.value
       };
+      console.log(this.formData.presentAddress.state);
       this.formData.collegeId = this.formData.collegeId * 1;
       const permanentStateId = this.formData.permanentAddress.state;
       const presentStateId = this.formData.presentAddress.state;
-      this.formData.permanentAddress.state = csc.getStateById(permanentStateId).name;
-      this.formData.presentAddress.state = csc.getStateById(presentStateId).name;
+      this.formData.permanentAddress.state = (isNaN(permanentStateId)) ? permanentStateId : csc.getStateById(permanentStateId).name;
+      this.formData.presentAddress.state = (isNaN(presentStateId)) ? presentStateId : csc.getStateById(presentStateId).name;
       this.signUpService.signUp(this.formData).subscribe(
         (data) => {
           if (data['errorMessage'] !== null) {
             AppComponent.showToaster(data['errorMessage'], 'error');
-            this.router.navigateByUrl(PageURL.SIGNUP_URL);
-            this.stepper.reset();
           } else {
             AppComponent.showToaster(data['successMessage'], 'success');
             this.router.navigateByUrl(PageURL.HOME_URL);
@@ -119,12 +119,8 @@ export class SignupComponent implements OnInit {
         err => {
           if (err.status) {
             AppComponent.showToaster('Validation failed', 'error');
-            this.router.navigateByUrl(PageURL.SIGNUP_URL);
-            this.stepper.reset();
           } else {
             AppComponent.showToaster(err['error'].message ? err['error'].message : err['error'].text, 'error');
-            this.router.navigateByUrl(PageURL.SIGNUP_URL);
-            this.stepper.reset();
           }
         }
       );
@@ -137,7 +133,7 @@ export class SignupComponent implements OnInit {
       return;
     }
 
-  }
+  };
 
   showToaster(message, type) {
     Swal({
